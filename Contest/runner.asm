@@ -17,6 +17,7 @@ introString db "Welcome to... ", 0Dh, 0Ah, 0Dh, 0Ah
 			db "TIPS & INFO:", 0Dh, 0Ah
 			db " - Asterisks (*) represent a math master, go up and press space to begin battle", 0Dh, 0Ah
 			db " - You may want to get some questions wrong here and there, as you win, difficulty and terms per question increase", 0Dh, 0Ah
+			db " - PEMDAS will not work here, equations are evaluated left to right", 0Dh, 0Ah
 			db "Press any key to continue...", 0Dh, 0Ah, 0
 		
 
