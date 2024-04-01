@@ -51,6 +51,19 @@ operator BYTE ?					; Equation operator code
 term BYTE ?						; Equation term
 equationBuffer BYTE 5000 DUP(?) ; Buffer to store the equation
 
+; Macro to put buffer position into edi
+GetBufferPos MACRO
+	movzx eax, maxX	; move max X into eax
+	add eax, 2		; add 2 to account for new line characters
+	movzx edi, yPos	; move y into edi
+	mov ebx, edx
+	mul edi			; multiply y by max x to get right row
+	mov edx, ebx
+	mov edi, eax	; mov mul result back into edi
+	movzx eax, xPos	; zero extend xpos to add to edi
+	add edi, eax	; add x to edi to get proper index
+	ENDM
+
 .code
 main PROC
 	
@@ -70,7 +83,7 @@ main PROC
 	game:
 		mov eax, 16
 		call Delay
-		call DrawInfo
+		;call DrawInfo
 		call MoveDot
 	jmp game
 
@@ -106,8 +119,11 @@ MoveDot PROC
 	call ReadKey
 	jz RedrawDot
 
+	; Save old position
 	mov dl, xPos
+	mov oldX, dl
 	mov dh, yPos
+	mov oldY, dh
 
 	; Check direction based on virtual scan code (AH)
     cmp  ah, 48h        ; Up arrow
@@ -125,31 +141,29 @@ MoveDot PROC
 
 	CheckStar:
 		; Check if the dot is next to a star
-		movzx eax, maxX
-		add eax, 2
-		movzx edi, yPos
-		mov ebx, edx
-		mul edi
-		mov edx, ebx
-		mov edi, eax
-		movzx eax, xPos
-		add edi, eax
+		GetBufferPos
+
+		; Place length of one row into eax
+		movzx ebx, maxX	; move max X into eax
+		add ebx, 2		; add 2 to account for new line characters
 
 		; Check Above
-		movzx eax, maxX	; move max X into eax
-		add eax, 2		; add 2 to account for new line characters
-		sub edi, eax	; subtract by one row to check above
+		sub edi, ebx	; subtract by one row to check above
 		mov al, byte ptr [buffer + edi]
 		cmp al, '*'
 		je checkPass
 
+		add edi, ebx	; add back to edi to return to original position
+
+
 		; Check Below
-		movzx eax, maxX
-		add eax, 2
-		add edi, eax	; add one row to check below
+		add edi, ebx	; add one row to check below
 		mov al, byte ptr [buffer + edi]
 		cmp al, '*'
 		je checkPass
+
+		sub edi, ebx	; subtract by one row to return to original position
+
 
 		; Check Left
 		dec edi			; move x left one to check left
@@ -157,11 +171,17 @@ MoveDot PROC
 		cmp al, '*'
 		je checkPass
 
+		inc edi 		; add back to edi to return to original position
+
+
 		; Check Right
 		inc edi			; move x right one to check right
 		mov al, byte ptr [buffer + edi]
 		cmp al, '*'
 		je checkPass
+
+		dec edi			; subtract by one row to return to original position
+
 		
 		jmp checkFail
 
@@ -242,17 +262,13 @@ MoveDot PROC
 		cmp ah, 1
 		jle RedrawDot	; If dot cannot move, jump without decrementing
 
-		movzx eax, maxX	; move max X into eax
-		add eax, 2		; add 2 to account for new line characters
-		movzx edi, yPos	; move y into edi
-		dec edi			; move y up one to account for move
-		mov ebx, edx
-		mul edi			; multiply y by max x to get right row
-		mov edx, ebx
-		mov edi, eax	; mov mul result back into edi
-		movzx eax, xPos	; zero extend xpos to add to edi
-		add edi, eax	; add x to edi to get proper index
-		mov al, byte ptr [buffer + edi]
+		GetBufferPos	; Put dot buffer position into edi
+
+		movzx ebx, maxX	; Move max X into ebx
+		add ebx, 2		; Add 2 to account for new line characters
+		sub edi, ebx 	; Move edi up one row to check above
+
+		mov al, byte ptr [buffer + edi]	; Move the character at the buffer position into al
 
 		cmp al, ' '
 		jne RedrawDot	; If space to be moved into isn't empty, skip
@@ -265,17 +281,14 @@ MoveDot PROC
 		cmp ah, [maxY]
 		jge RedrawDot
 
-		movzx eax, maxX
-		add eax, 2
-		movzx edi, yPos
-		inc edi			; move y down one to account for move
-		mov ebx, edx
-		mul edi
-		mov edx, ebx
-		mov edi, eax
-		movzx eax, xPos
-		add edi, eax
-		mov al, byte ptr [buffer + edi]
+		GetBufferPos	; Put dot buffer position into edi
+
+		movzx ebx, maxX	; Move max X into ebx
+		add ebx, 2		; Add 2 to account for new line characters
+		add edi, ebx 	; Move edi down one row to check below
+
+		mov al, byte ptr [buffer + edi]	; Move the character at the buffer position into al
+
 		
 		cmp al, ' '
 		jne RedrawDot
@@ -288,17 +301,11 @@ MoveDot PROC
 		cmp ah, 1
 		jle RedrawDot
 
-		movzx eax, maxX
-		add eax, 2
-		movzx edi, yPos
-		mov ebx, edx
-		mul edi
-		mov edx, ebx
-		mov edi, eax
-		movzx eax, xPos
-		add edi, eax
+		GetBufferPos	; Put dot buffer position into edi
+
 		dec edi			; move x left one to account for move
-		mov al, byte ptr [buffer + edi]
+
+		mov al, byte ptr [buffer + edi]	; Move the character at the buffer position into al
 		
 		cmp al, ' '
 		jne RedrawDot
@@ -311,17 +318,11 @@ MoveDot PROC
 		cmp ah, [maxX]
 		jge RedrawDot
 
-		movzx eax, maxX
-		add eax, 2
-		movzx edi, yPos
-		mov ebx, edx
-		mul edi
-		mov edx, ebx
-		mov edi, eax
-		movzx eax, xPos
-		add edi, eax
+		GetBufferPos 	; Put dot buffer position into edi
+
 		inc edi			; move x right one to account for move
-		mov al, byte ptr [buffer + edi]
+
+		mov al, byte ptr [buffer + edi]	; Move the character at the buffer position into al
 		
 		cmp al, ' '
 		jne RedrawDot
@@ -330,8 +331,8 @@ MoveDot PROC
 		jmp RedrawDot
 
 	RedrawDot:
-		;call Clrscr
-		;call DrawWorld
+		mov dl, oldX
+		mov dh, oldY
 		call Gotoxy
 		mov al, ' '
 		call WriteChar	; Write space over old dot
@@ -424,19 +425,12 @@ DrawInfo PROC
 	mov dh, 2
 	call Gotoxy
 
-	movzx eax, maxX	; move max X into eax
-	add eax, 2
-	movzx edi, yPos	; move y into edi
-	mov ebx, edx
-	mul edi			; multiply y by max x to get right row
-	mov edx, ebx
-	mov edi, eax	; mov mul result back into edi
-	movzx eax, xPos	; zero extend xpos to add to edi
-	add edi, eax	; add x to edi to get proper index
+	GetBufferPos
 
 	dec edi
 	mov al, byte ptr [buffer + edi]
 	
+	mWrite "Left: ", 0
 	call WriteChar
 
 	mov dl, 85
@@ -447,6 +441,7 @@ DrawInfo PROC
 	inc edi
 	mov al, byte ptr [buffer + edi]
 
+	mWrite "Right: ", 0
 	call WriteChar
 
 
