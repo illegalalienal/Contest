@@ -15,12 +15,12 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
+    <Text Include="mathphrases.txt" />
+    <Text Include="world.txt" />
+  </ItemGroup>
+  <ItemGroup>
     <MASM Include="runner.asm">
       <Filter>Source Files</Filter>
     </MASM>
-  </ItemGroup>
-  <ItemGroup>
-    <Text Include="mathphrases.txt" />
-    <Text Include="world.txt" />
   </ItemGroup>
 </Project>

@@ -19,11 +19,11 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
-    <MASM Include="runner.asm" />
-  </ItemGroup>
-  <ItemGroup>
     <Text Include="mathphrases.txt" />
     <Text Include="world.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <MASM Include="runner.asm" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>17.0</VCProjectVersion>
