@@ -20,7 +20,7 @@
   </ItemGroup>
   <ItemGroup>
     <Text Include="mathphrases.txt" />
-    <Text Include="world.txt" />
+    <Text Include="world0.txt" />
   </ItemGroup>
   <ItemGroup>
     <MASM Include="runner.asm" />

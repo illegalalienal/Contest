@@ -1,7 +1,24 @@
 INCLUDE Irvine32.inc
 INCLUDE Macros.inc
 
+SetConsoleTextAttribute PROTO,
+    hConsoleOutput: DWORD,
+    wAttributes: WORD
+
+SetConsoleCursorInfo PROTO,
+    hConsoleOutput:DWORD,
+    lpConsoleCursorInfo:PTR CONSOLE_CURSOR_INFO
+
+CONSOLE_CURSOR_INFO STRUCT
+    dwSize DWORD ?
+    bVisible DWORD ?
+CONSOLE_CURSOR_INFO ENDS
+
 .data
+cursorInfo CONSOLE_CURSOR_INFO <1, FALSE>  ; Set cursor size to 1 and visibility to FALSE
+
+outroString db "Congratulations! You have collected all the stars and saved the world from math illiteracy!", 0Dh, 0Ah, 0Dh, 0Ah
+			db "You are now the math master of the world! Press any key to exit...", 0Dh, 0Ah, 0
 
 introString db "Welcome to... ", 0Dh, 0Ah, 0Dh, 0Ah
 
@@ -36,6 +53,8 @@ phrasesbytesRead DWORD ?
 phraseStart DWORD ?
 phraseEnd DWORD ?
 
+starPos DWORD ?
+totalStars BYTE 0
 oldX BYTE ?
 oldY BYTE ?
 maxX BYTE 80
@@ -67,8 +86,10 @@ GetBufferPos MACRO
 .code
 main PROC
 	
-	
+	call HideCursor
+	call PrepareWorld
 	call PreparePhrases
+	call CountStars
 
 	call IntroScreen
 
@@ -85,10 +106,55 @@ main PROC
 		call Delay
 		;call DrawInfo
 		call MoveDot
+		.IF totalStars == 0
+			jmp Outro
+		.ENDIF
 	jmp game
+
+	Outro:
+		call DisplayOutro
 
 	exit
 main ENDP
+
+DisplayOutro PROC
+	call Clrscr
+	mov dl, 0
+	mov dh, 0
+	mov edx, OFFSET outroString
+	call WriteString
+
+	;Wait for key press before exiting outro screen
+	WaitLoop:
+	call ReadKey
+	jz WaitLoop
+
+	ret
+DisplayOutro ENDP
+
+SetColor PROC
+    LOCAL hConsole:DWORD
+
+	; Get a handle to the console's output buffer
+	invoke GetStdHandle, STD_OUTPUT_HANDLE
+	mov hConsole, eax
+
+	; Set the text color
+	invoke SetConsoleTextAttribute, hConsole, cx
+	ret
+
+SetColor ENDP
+
+HideCursor PROC
+    LOCAL hConsole:DWORD
+    ; Get a handle to the console's output buffer
+    invoke GetStdHandle, STD_OUTPUT_HANDLE
+    mov hConsole, eax
+    ; Set the cursor info to hide the cursor
+    lea eax, cursorInfo
+    invoke SetConsoleCursorInfo, hConsole, eax
+    ret
+HideCursor ENDP
 
 IntroScreen PROC
 	; Clear screen and write intro message
@@ -186,6 +252,8 @@ MoveDot PROC
 		jmp checkFail
 
 		checkPass:
+		    ; Save the position of the star
+			mov starPos, edi
 			; Clear screen, write battle message, show math problem
 			call Clrscr
 			; Move cursor to top left corner
@@ -219,6 +287,10 @@ MoveDot PROC
 
 			CorrectAnswer: 
 			; Write correct answer message, increase difficulty
+			mov edi, starPos
+			mov byte ptr [buffer + edi], ' '	; Change the star to a space
+			dec totalStars
+
 			mov dl, 0
 			mov dh, 15
 			call Gotoxy
@@ -346,8 +418,7 @@ MoveDot PROC
 	ret
 MoveDot ENDP
 
-DrawWorld PROC
-
+PrepareWorld PROC
 	; Open the file for reading
 	mov edx, OFFSET filename      ; Pointer to filename
 	call OpenInputFile                 ; OpenFile is used for reading; adjust if needed
@@ -372,6 +443,38 @@ DrawWorld PROC
 	mov eax, fileHandle
 	call CloseFile
 
+	ret
+PrepareWorld ENDP
+
+	CountStars PROC
+		xor edi, edi                ; Clear edi for use as index
+		mov ecx, bytesRead          ; Length of the buffer to print
+
+		; Clear Screen before drawing
+		call Clrscr
+	CountLoop:
+		cmp edi, ecx                ; Check if we've reached the end of the buffer
+		je EndCount                  ; Jump to end if done
+
+		mov al, byte ptr [buffer + edi] ; Move the current character to eax, zero-extend to prevent sign extension
+		cmp al, '*'
+		je CountStar
+
+		inc edi                     ; Move to the next character
+		jmp CountLoop                ; Continue loop
+
+	CountStar:
+		inc totalStars
+		inc edi
+		jmp CountLoop
+
+	EndCount:
+
+
+	ret
+CountStars ENDP
+
+DrawWorld PROC	
 	;Buffer contains the worlds information
 	xor edi, edi                ; Clear edi for use as index
     mov ecx, bytesRead          ; Length of the buffer to print
@@ -385,15 +488,12 @@ DrawLoop:
     mov al, byte ptr [buffer + edi] ; Move the current character to eax, zero-extend to prevent sign extension
 
 	cmp al, '*'
-	je ChangeColorYellow
+	je WriteYellow
 
-	ChangeColorDefault:
-	;ChangeTextColor white + (black * 16)
 	jmp Write
 
-	ChangeColorYellow:
-	;ChangeTextColor yellow + (black * 16)
-	jmp Write
+	WriteYellow:
+
 
 
 	Write:
@@ -430,8 +530,8 @@ DrawInfo PROC
 	dec edi
 	mov al, byte ptr [buffer + edi]
 	
-	mWrite "Left: ", 0
-	call WriteChar
+	;mWrite "Left: ", 0
+	;call WriteChar
 
 	mov dl, 85
 	mov dh, 3
@@ -441,8 +541,8 @@ DrawInfo PROC
 	inc edi
 	mov al, byte ptr [buffer + edi]
 
-	mWrite "Right: ", 0
-	call WriteChar
+	;mWrite "Right: ", 0
+	;call WriteChar
 
 
 	ret
