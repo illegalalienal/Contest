@@ -64,11 +64,19 @@ yPos BYTE 1
 
 difficultyLevel BYTE 2
 
-equationAnswer DWORD ?			; Variable to store the answer to the equation
+currentTerm BYTE ?
+termArr db 100 DUP(?)
+operators db 100 DUP(?)
+
+equationAnswer BYTE ?			; Variable to store the answer to the equation
 terms BYTE ?					; Number of terms in the equation
 operator BYTE ?					; Equation operator code
 term BYTE ?						; Equation term
 equationBuffer BYTE 5000 DUP(?) ; Buffer to store the equation
+
+
+
+;=========================MACROS==================================================================================================================================
 
 ; Macro to put buffer position into edi
 GetBufferPos MACRO
@@ -83,7 +91,21 @@ GetBufferPos MACRO
 	add edi, eax	; add x to edi to get proper index
 	ENDM
 
+; Define a macro named MoveByteToVar
+; Arguments:
+;   var - The variable to move the byte into
+;   src - The source pointer or index
+
+MoveByteToVar MACRO var, src
+    LOCAL tmpReg
+    movzx eax, BYTE PTR [src]   ; Move byte at src to EAX with zero-extension
+    mov [var], al				; Move the content of EAX to var
+ENDM
+
+
+
 .code
+;========================================MAIN==========================================================================================================================================
 main PROC
 	
 	call HideCursor
@@ -116,6 +138,8 @@ main PROC
 
 	exit
 main ENDP
+
+;==========================================HELPER FUNCTIONS===============================================================================================================================
 
 DisplayOutro PROC
 	call Clrscr
@@ -280,7 +304,7 @@ MoveDot PROC
 
 			; If input is good, check against equation answer
 			GoodInput:
-			cmp eax, equationAnswer
+			cmp al, equationAnswer
 			je CorrectAnswer
 
 			jmp IncorrectAnswer
@@ -409,11 +433,19 @@ MoveDot PROC
 		mov al, ' '
 		call WriteChar	; Write space over old dot
 
+		; Set text color to red
+		mov cx, 4          ; Attribute for red color
+		call SetColor
+
 		mov dl, xPos
 		mov dh, yPos
 		call Gotoxy		; Go to new xy
 		mov al, '.'
 		call WriteChar	; Write dot in new xy
+
+		; Reset text color to white on black
+		mov cx, 15         ; Attribute for bright white on black
+		call SetColor
 		
 	ret
 MoveDot ENDP
@@ -477,12 +509,12 @@ CountStars ENDP
 DrawWorld PROC	
 	;Buffer contains the worlds information
 	xor edi, edi                ; Clear edi for use as index
-    mov ecx, bytesRead          ; Length of the buffer to print
+    mov ebx, bytesRead          ; Length of the buffer to print
 
 	; Clear Screen before drawing
 	call Clrscr
 DrawLoop:
-    cmp edi, ecx                ; Check if we've reached the end of the buffer
+    cmp edi, ebx                ; Check if we've reached the end of the buffer
     je EndDraw                  ; Jump to end if done
 
     mov al, byte ptr [buffer + edi] ; Move the current character to eax, zero-extend to prevent sign extension
@@ -490,14 +522,27 @@ DrawLoop:
 	cmp al, '*'
 	je WriteYellow
 
-	jmp Write
+	jmp NormalWrite
 
 	WriteYellow:
+	 ; Set text color to yellow
+    mov cx, 14                 ; Attribute for yellow color
+    call SetColor
+	mov al, '*'
+    call WriteChar             ; Write the asterisk in yellow
+
+	; Reset text color to white on black
+    mov cx, 15                 ; Attribute for bright white on black
+    call SetColor
+
+	jmp PostWrite
 
 
 
-	Write:
+	NormalWrite:
     call WriteChar					; Write the character to the 
+
+	PostWrite:
 
 
     inc edi                     ; Move to the next character
@@ -660,9 +705,6 @@ GenerateMathEquation PROC
 	mov al, 0	; Move 0 into al
 	rep stosb	; Fill the buffer with 0
 
-	; Clear the equation answer
-	mov equationAnswer, 0
-
 	; Generate first term
 	call Randomize
 	mov eax, 9					; 9 is the maximum value for a term
@@ -676,9 +718,6 @@ GenerateMathEquation PROC
 	mov [edi], al				; Move the first term into buffer
 	inc edi						; Move to the next position in the equation buffer
 
-	; Store term into Equation Answer
-	movzx eax, term				; Move the term into eax
-	mov equationAnswer, eax	; Move the first term into the answer
 	inc cl						; Increment the counter
 
 	; Prepare counter
@@ -709,23 +748,14 @@ GenerateMathEquation PROC
 			mov BYTE PTR [edi], ' '
 			mov BYTE PTR [edi+1], '+'
 			mov BYTE PTR [edi+2], ' '
-			movzx eax, term				; Move the term into eax
-			add equationAnswer, eax		; Add the term to the answer
 		.ELSEIF operator == 2
 			mov BYTE PTR [edi], ' '
 			mov BYTE PTR [edi+1], '-'
 			mov BYTE PTR [edi+2], ' '
-			mov term, al				; Move the term into al
-			movzx eax, term				; Move the term into eax
-			sub equationAnswer, eax		; Subtract the term from the answer
 		.ELSEIF operator == 3
 			mov BYTE PTR [edi], ' '
 			mov BYTE PTR [edi+1], '*'
 			mov BYTE PTR [edi+2], ' '
-			movzx ebx, term				; Move the term into ebx
-			mov eax, equationAnswer		; Move the answer into eax
-			mul ebx						; Multiply the term by the answer
-			mov equationAnswer, eax		; Move the result into the equation answer
 		.ENDIF
 
 		; Add the term to the equation buffer
@@ -761,8 +791,136 @@ GenerateMathEquation PROC
 		jmp PrintLoop
 
 		EndPrint:
+		call EvaluateExpression
 	ret
 
 GenerateMathEquation ENDP
+
+EvaluateExpression PROC
+push eax
+
+;move edi to the start of the equation buffer
+imul ecx, difficultyLevel, 4
+inc ecx
+sub edi, ecx
+
+mov ebx, OFFSET termArr
+mov ecx, OFFSET operators
+
+; Turn equation buffer into two arrays
+TransformLoop:
+
+	mov al, BYTE PTR [edi]		; Load current term into al
+	mov currentTerm, al			; Move al into currentTerm
+
+	.IF currentTerm > '0' && currentTerm <= '9'	; currentToken is a number
+		mov al, currentTerm
+		mov BYTE PTR [ebx], al		; save currentToken to terms
+		sub BYTE PTR [ebx], '0'				; convert to raw value
+		inc ebx						; increment ebx for next term
+		inc edi						; increment edi to point at next buffer pos
+		jmp TransformLoop
+	.ELSEIF currentTerm == '+' || currentTerm == '-' || currentTerm == '*'	; currentToken is a valid operator
+		mov al, currentTerm
+		mov BYTE PTR [ecx], al				; save currentToken to operators
+		inc ecx								; increment ecx for next operator
+		inc edi								; increment edi for next buffer pos
+		jmp TransformLoop
+	.ELSEIF currentTerm == ' '						; currentToken is a filler space
+		inc edi				; Move to next position in buffer
+		jmp TransformLoop	; Start next loop
+	.ELSE											; currentToken is anything else (i.e. '=')
+	mov BYTE PTR [ebx], 0FFh		; Values to signal when end of useful data has been reached
+	mov BYTE PTR [ecx], 0FFh
+	.ENDIF
+
+
+mov equationAnswer, 0		; Clear equation answer
+
+
+; First loop to evaluate the answer, performs all multiplication
+EvalLoop1:
+	mov ebx, OFFSET termArr
+	mov ecx, OFFSET operators		; reset ebx and ecx to point to the arrays
+
+	;mov currentTerm, BYTE PTR [ecx]		; Load operator array into currentTerm, we will be searching mainly for operators
+	MoveByteToVar currentTerm, ecx
+
+
+	; When multiplication is found at index n, it's corresponding numbers are located at 2n and 2n-1 in the terms array.
+
+	.IF currentTerm == '*'
+		mov edx, ecx					; save ecx (current term) into edx
+		sub edx, OFFSET operators		; sub original ecx from current to get distance from start
+		add edx, edx					; double distance to get proper offset for terms
+		movzx eax, BYTE PTR [ebx+edx]
+		imul BYTE PTR [ebx+edx-1]		; multiply terms corresponding to operator and save in first operator position
+		mov BYTE PTR [ebx+edx], 0			; clear the term where the multiplier used to be
+		inc ecx							; increment ecx for next operator
+	.ELSEIF currentTerm == 0FFh	; if current term is data-end signal, finish loop
+		jmp EvalLoop2
+	.ELSE	; if not multiplication, continue loop
+		inc ecx
+		jmp EvalLoop1
+	.ENDIF
+
+jmp EvalLoop1
+
+; Second loop to do all addition and subtraction
+EvalLoop2:
+	mov ebx, OFFSET termArr
+	mov ecx, OFFSET operators
+	MoveByteToVar currentTerm, ecx
+
+	MoveByteToVar equationAnswer, ebx	; Move first term into equation answer
+	inc ebx								; Increment ebx to consider next operator
+
+	.WHILE currentTerm != 0FFh
+		LoopStart:
+		; Loop through terms to find next non-zero number
+		mov al, BYTE PTR [ebx]	; Load current term into al
+
+		.IF al != 0						; If term isn't zero, go ahead and check for next term
+		OpCheck:
+			.IF BYTE PTR [ecx] == '+' ; If next operator is addition
+				add equationAnswer, al	; Add next term, move to next one
+				inc ecx					; Increment ecx to consider next operator
+			.ELSEIF BYTE PTR [ecx] == '-' ; If next operator is substraction
+				sub equationAnswer, al	; Subtract next term, move to next one
+				inc ecx					; Increment ecx to consider next operator
+			.ELSE						; In case of any other character, increment to next operator and check again
+				inc ecx					; Increment ecx to consider next operator
+				jmp OpCheck				; Jump back to check next operator
+			
+			.ENDIF
+		.ENDIF							; If term is zero, it was erased, increment to next term but not operator
+			inc ebx						; Increment ebx to consider next term
+			jmp LoopStart
+		
+	.ENDW
+
+	.IF currentTerm == '+'		; If operator is addition
+		mov al, BYTE PTR [ebx]
+		add equationAnswer, al	; Add next term, move to next one
+		inc ebx
+		inc ecx
+	.ELSEIF currentTerm == '-'	; If operator is substraction
+		mov al, BYTE PTR [ebx]
+		sub equationAnswer, al	; Subtract next term, move to next one
+		inc ebx
+		inc ecx
+	.ELSEIF currentTerm == 0FFh	; If end of data has been reached, end loop
+		jmp EvalLoopFinish
+	.ELSE						; In case of any other character, ignore and move forward
+		inc ecx
+	.ENDIF
+
+	jmp EvalLoop2
+
+	EvalLoopFinish:
+	
+	pop eax
+	ret
+EvaluateExpression ENDP
 
 END main
