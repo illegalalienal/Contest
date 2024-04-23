@@ -20,21 +20,21 @@ cursorInfo CONSOLE_CURSOR_INFO <1, FALSE>  ; Set cursor size to 1 and visibility
 outroString db "Congratulations! You have collected all the stars and saved the world from math illiteracy!", 0Dh, 0Ah, 0Dh, 0Ah
 			db "You are now the math master of the world! Press any key to exit...", 0Dh, 0Ah, 0
 
-introString db "Welcome to... ", 0Dh, 0Ah, 0Dh, 0Ah
+introString0 db "Welcome to...", 0Dh, 0Ah, 0Dh, 0Ah, 0
 
-			db "  __  __    _  _____ _   _ _____ __  __  ___  _   _ ___ _   _ __  __ ", 0Dh, 0Ah
-			db " |  \/  |  / \|_   _| | | | ____|  \/  |/ _ \| \ | |_ _| | | |  \/  |", 0Dh, 0Ah
-			db " | |\/| | / _ \ | | | |_| |  _| | |\/| | | | |  \| || || | | | |\/| |", 0Dh, 0Ah
-			db " | |  | |/ ___ \| | |  _  | |___| |  | | |_| | |\  || || |_| | |  | |", 0Dh, 0Ah
-			db " |_|  |_/_/   \_\_| |_| |_|_____|_|  |_|\___/|_| \_|___|\___/|_|  |_|", 0Dh, 0Ah, 0Dh, 0Ah
-
+titleString1 db "  __  __    _  _____ _   _ _____ __  __  ___  _   _ ___ _   _ __  __ ", 0Dh, 0Ah, 0
+titleString2 db " |  \/  |  / \|_   _| | | | ____|  \/  |/ _ \| \ | |_ _| | | |  \/  |", 0Dh, 0Ah, 0
+titleString3 db " | |\/| | / _ \ | | | |_| |  _| | |\/| | | | |  \| || || | | | |\/| |", 0Dh, 0Ah, 0
+titleString4 db " | |  | |/ ___ \| | |  _  | |___| |  | | |_| | |\  || || |_| | |  | |", 0Dh, 0Ah, 0
+titleString5 db " |_|  |_/_/   \_\_| |_| |_|_____|_|  |_|\___/|_| \_|___|\___/|_|  |_|", 0Dh, 0Ah, 0Dh, 0Ah, 0
+introString db "Now in color!", 0Dh, 0Ah, 0Dh, 0Ah
 
 			db "a game of math and adventure!", 0Dh, 0Ah
 			db "Travel through the world and challenge all the math masters.... if you dare....", 0Dh, 0Ah, 0Dh, 0ah
 			db "TIPS & INFO:", 0Dh, 0Ah
 			db " - Asterisks (*) represent a math master, go up and press space to begin battle", 0Dh, 0Ah
 			db " - You may want to get some questions wrong here and there, as you win, difficulty and terms per question increase", 0Dh, 0Ah
-			db " - PEMDAS will not work here, equations are evaluated left to right", 0Dh, 0Ah
+			db " - PEMDAS now works! How exciting! Go ahead and ask the author how difficult it was to implement!", 0Dh, 0Ah
 			db "Press any key to continue...", 0Dh, 0Ah, 0
 		
 
@@ -102,6 +102,22 @@ MoveByteToVar MACRO var, src
     mov [var], al				; Move the content of EAX to var
 ENDM
 
+RemoveBufferElement MACRO position
+	; Calculate start of the shift
+	mov esi, position	; Load the address of the next element into ESI
+	inc esi
+	mov edi, position		; Load the address of the current element into EDI
+
+	; Set up for loop to shift all subsequent bytes left by one
+	.WHILE BYTE PTR [edi] != 0FFh
+		mov al, BYTE PTR [esi]	; Load byte at source position
+		mov BYTE PTR [edi], al	; Store it into destination position
+		inc esi			; Move to next source position
+		inc edi			; Move to next destination position
+	.ENDW
+
+	mov BYTE PTR [edi], 0	; Clear the last byte
+ENDM
 
 
 .code
@@ -181,8 +197,42 @@ HideCursor PROC
 HideCursor ENDP
 
 IntroScreen PROC
+	mov edx, OFFSET introString0
+	call WriteString
+
 	; Clear screen and write intro message
 	call Clrscr
+	; Print titleString in varying colors
+	mov cx, 4		  ; Attribute for red color
+	call SetColor
+	mov edx, OFFSET titleString1
+	call WriteString
+
+	mov cx, 6		; Attribute for orange color
+	call SetColor
+	mov edx, OFFSET titleString2
+	call WriteString
+
+	mov cx, 14		; Attribute for yellow color
+	call SetColor
+	mov edx, OFFSET titleString3
+	call WriteString 
+
+	mov cx, 2		; Attribute for green color
+	call SetColor
+	mov edx, OFFSET titleString4
+	call WriteString
+
+	mov cx, 1		; Attribute for blue color
+	call SetColor
+	mov edx, OFFSET titleString5
+	call WriteString
+
+	; Reset text color to white on black
+	mov cx, 15         ; Attribute for bright white on black
+	call SetColor
+
+
 	mov edx, OFFSET introString
 	call WriteString
 
@@ -799,10 +849,11 @@ GenerateMathEquation ENDP
 EvaluateExpression PROC
 push eax
 
-;move edi to the start of the equation buffer
-imul ecx, difficultyLevel, 4
-inc ecx
-sub edi, ecx
+;move edi to the start of the equation 
+movzx eax, difficultyLevel
+imul eax, 4
+inc eax
+sub edi, eax
 
 mov ebx, OFFSET termArr
 mov ecx, OFFSET operators
@@ -816,9 +867,9 @@ TransformLoop:
 	.IF currentTerm > '0' && currentTerm <= '9'	; currentToken is a number
 		mov al, currentTerm
 		mov BYTE PTR [ebx], al		; save currentToken to terms
-		sub BYTE PTR [ebx], '0'				; convert to raw value
+		sub BYTE PTR [ebx], 48				; convert to raw value
 		inc ebx						; increment ebx for next term
-		inc edi						; increment edi to point at next buffer pos
+		inc edi						; increment edi to point at next bufs
 		jmp TransformLoop
 	.ELSEIF currentTerm == '+' || currentTerm == '-' || currentTerm == '*'	; currentToken is a valid operator
 		mov al, currentTerm
@@ -836,87 +887,91 @@ TransformLoop:
 
 
 mov equationAnswer, 0		; Clear equation answer
+mov ebx, OFFSET termArr
+mov ecx, OFFSET operators		; reset ebx and ecx to point to the arrays
 
 
 ; First loop to evaluate the answer, performs all multiplication
 EvalLoop1:
-	mov ebx, OFFSET termArr
-	mov ecx, OFFSET operators		; reset ebx and ecx to point to the arrays
 
 	;mov currentTerm, BYTE PTR [ecx]		; Load operator array into currentTerm, we will be searching mainly for operators
 	MoveByteToVar currentTerm, ecx
 
 
-	; When multiplication is found at index n, it's corresponding numbers are located at 2n and 2n-1 in the terms array.
+	; When multiplication is found at index n, it's corresponding numbers are located at n and n+1 in the terms array.
 
 	.IF currentTerm == '*'
 		mov edx, ecx					; save ecx (current term) into edx
 		sub edx, OFFSET operators		; sub original ecx from current to get distance from start
-		add edx, edx					; double distance to get proper offset for terms
-		movzx eax, BYTE PTR [ebx+edx]
-		imul BYTE PTR [ebx+edx-1]		; multiply terms corresponding to operator and save in first operator position
-		mov BYTE PTR [ebx+edx], 0			; clear the term where the multiplier used to be
-		inc ecx							; increment ecx for next operator
-	.ELSEIF currentTerm == 0FFh	; if current term is data-end signal, finish loop
-		jmp EvalLoop2
+		movzx eax, BYTE PTR [ebx+edx+1]
+		imul BYTE PTR [ebx+edx]			; multiply terms corresponding to operator and save in first operator position
+		mov BYTE PTR [ebx+edx], al		; save result in first operator position
+
+		; Set up for loop to shift all subsequent bytes left by one
+		BufferShift:
+			mov al, BYTE PTR [ebx+edx+2]	; Load term byte at source position
+			mov BYTE PTR [ebx+edx+1], al		; Store it into destination position
+
+			mov al, BYTE PTR [ecx+edx+1]		; Load operator byte at source position
+			mov BYTE PTR [ecx+edx], al	; Store it into destination position
+
+			inc edx							; Move to next source position
+
+			mov al, BYTE PTR [ecx+edx-1]		; Load term byte at source position
+
+			cmp al, 0
+			je EvalLoop1End
+
+			cmp al, 0FFh	; Check if we've reached the end of the array
+			jne BufferShift
+		mov BYTE PTR [ebx+edx+1], 0	; Clear the last byte
+		mov BYTE PTR [ecx+edx], 0	; Clear the last byte
+
+		;inc ecx							; increment ecx for next operator
+		jmp EvalLoop1
+	.ELSEIF currentTerm == 0FFh; if current term is data-end signal, finish loop
+		jmp EvalLoop1End
 	.ELSE	; if not multiplication, continue loop
 		inc ecx
 		jmp EvalLoop1
 	.ENDIF
 
 jmp EvalLoop1
+EvalLoop1End:
+	mov ebx, OFFSET termArr
+	mov ecx, OFFSET operators
 
 ; Second loop to do all addition and subtraction
 EvalLoop2:
-	mov ebx, OFFSET termArr
-	mov ecx, OFFSET operators
 	MoveByteToVar currentTerm, ecx
 
 	MoveByteToVar equationAnswer, ebx	; Move first term into equation answer
 	inc ebx								; Increment ebx to consider next operator
 
-	.WHILE currentTerm != 0FFh
-		LoopStart:
+	LoopStart:
+	.WHILE BYTE PTR [ecx] != 0FFh
 		; Loop through terms to find next non-zero number
-		mov al, BYTE PTR [ebx]	; Load current term into al
+		mov al, BYTE PTR [ecx]	; Load current operator into al
+		mov ah, BYTE PTR [ebx]	; Load current term into ah
 
-		.IF al != 0						; If term isn't zero, go ahead and check for next term
-		OpCheck:
-			.IF BYTE PTR [ecx] == '+' ; If next operator is addition
-				add equationAnswer, al	; Add next term, move to next one
+		.IF ah != 0						; If term isn't zero, go ahead and check for next 
+			.IF al == '+' ; If next operator is addition
+				add equationAnswer, ah	; Add next term, move to next one
+				inc ebx
 				inc ecx					; Increment ecx to consider next operator
-			.ELSEIF BYTE PTR [ecx] == '-' ; If next operator is substraction
-				sub equationAnswer, al	; Subtract next term, move to next one
+			.ELSEIF al == '-' ; If next operator is substraction
+				sub equationAnswer, ah	; Subtract next term, move to next one
+				inc ebx
 				inc ecx					; Increment ecx to consider next operator
+			.ELSEIF al == 0FFh	; If end of data has been reached, end loop
+				jmp EvalLoopFinish
 			.ELSE						; In case of any other character, increment to next operator and check again
-				inc ecx					; Increment ecx to consider next operator
-				jmp OpCheck				; Jump back to check next operator
-			
+				inc ecx					; Increment ecx to consider next operator			
 			.ENDIF
-		.ENDIF							; If term is zero, it was erased, increment to next term but not operator
-			inc ebx						; Increment ebx to consider next term
-			jmp LoopStart
-		
-	.ENDW
-
-	.IF currentTerm == '+'		; If operator is addition
-		mov al, BYTE PTR [ebx]
-		add equationAnswer, al	; Add next term, move to next one
-		inc ebx
-		inc ecx
-	.ELSEIF currentTerm == '-'	; If operator is substraction
-		mov al, BYTE PTR [ebx]
-		sub equationAnswer, al	; Subtract next term, move to next one
-		inc ebx
-		inc ecx
-	.ELSEIF currentTerm == 0FFh	; If end of data has been reached, end loop
-		jmp EvalLoopFinish
-	.ELSE						; In case of any other character, ignore and move forward
-		inc ecx
-	.ENDIF
-
-	jmp EvalLoop2
-
+		.ELSE
+			inc ecx						; If term is zero, it was erased, increment to next term but not operator
+		.ENDIF									
+		.ENDW
 	EvalLoopFinish:
 	
 	pop eax

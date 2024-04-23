@@ -1,4 +1,4 @@
-Microsoft (R) Macro Assembler Version 14.39.33523.0	    04/21/24 13:42:47
+Microsoft (R) Macro Assembler Version 14.39.33523.0	    04/22/24 10:58:55
 runner.asm						     Page 1 - 1
 
 
@@ -76,12 +76,12 @@ runner.asm						     Page 1 - 1
 	   78 69 74 2E 2E
 	   2E 0D 0A 00
 
- 000000AC 57 65 6C 63 6F	introString db "Welcome to... ", 0Dh, 0Ah, 0Dh, 0Ah
+ 000000AC 57 65 6C 63 6F	introString0 db "Welcome to...", 0Dh, 0Ah, 0Dh, 0Ah, 0
 	   6D 65 20 74 6F
-	   2E 2E 2E 20 0D
-	   0A 0D 0A
+	   2E 2E 2E 0D 0A
+	   0D 0A 00
 
- 000000BE  20 20 5F 5F 20				db "  __  __    _  _____ _   _ _____ __  __  ___  _   _ ___ _   _ __  __ ", 0Dh, 0Ah
+ 000000BE 20 20 5F 5F 20	titleString1 db "  __  __    _  _____ _   _ _____ __  __  ___  _   _ ___ _   _ __  __ ", 0Dh, 0Ah, 0
 	   20 5F 5F 20 20
 	   20 20 5F 20 20
 	   5F 5F 5F 5F 5F
@@ -95,8 +95,8 @@ runner.asm						     Page 1 - 1
 	   20 5F 20 20 20
 	   5F 20 5F 5F 20
 	   20 5F 5F 20 0D
-	   0A
- 00000105  20 7C 20 20 5C				db " |  \/  |  / \|_   _| | | | ____|  \/  |/ _ \| \ | |_ _| | | |  \/  |", 0Dh, 0Ah
+	   0A 00
+ 00000106 20 7C 20 20 5C	titleString2 db " |  \/  |  / \|_   _| | | | ____|  \/  |/ _ \| \ | |_ _| | | |  \/  |", 0Dh, 0Ah, 0
 	   2F 20 20 7C 20
 	   20 2F 20 5C 7C
 	   5F 20 20 20 5F
@@ -110,8 +110,8 @@ runner.asm						     Page 1 - 1
 	   7C 20 7C 20 7C
 	   20 7C 20 20 5C
 	   2F 20 20 7C 0D
-	   0A
- 0000014C  20 7C 20 7C 5C				db " | |\/| | / _ \ | | | |_| |  _| | |\/| | | | |  \| || || | | | |\/| |", 0Dh, 0Ah
+	   0A 00
+ 0000014E 20 7C 20 7C 5C	titleString3 db " | |\/| | / _ \ | | | |_| |  _| | |\/| | | | |  \| || || | | | |\/| |", 0Dh, 0Ah, 0
 	   2F 7C 20 7C 20
 	   2F 20 5F 20 5C
 	   20 7C 20 7C 20
@@ -125,8 +125,8 @@ runner.asm						     Page 1 - 1
 	   7C 20 7C 20 7C
 	   20 7C 20 7C 5C
 	   2F 7C 20 7C 0D
-	   0A
- 00000193  20 7C 20 7C 20				db " | |  | |/ ___ \| | |  _  | |___| |  | | |_| | |\  || || |_| | |  | |", 0Dh, 0Ah
+	   0A 00
+ 00000196 20 7C 20 7C 20	titleString4 db " | |  | |/ ___ \| | |  _  | |___| |  | | |_| | |\  || || |_| | |  | |", 0Dh, 0Ah, 0
 	   20 7C 20 7C 2F
 	   20 5F 5F 5F 20
 	   5C 7C 20 7C 20
@@ -140,8 +140,8 @@ runner.asm						     Page 1 - 1
 	   7C 20 7C 5F 7C
 	   20 7C 20 7C 20
 	   20 7C 20 7C 0D
-	   0A
- 000001DA  20 7C 5F 7C 20				db " |_|  |_/_/   \_\_| |_| |_|_____|_|  |_|\___/|_| \_|___|\___/|_|  |_|", 0Dh, 0Ah, 0Dh, 0Ah
+	   0A 00
+ 000001DE 20 7C 5F 7C 20	titleString5 db " |_|  |_/_/   \_\_| |_| |_|_____|_|  |_|\___/|_| \_|___|\___/|_|  |_|", 0Dh, 0Ah, 0Dh, 0Ah, 0
 	   20 7C 5F 2F 5F
 	   2F 20 20 20 5C
 	   5F 5C 5F 7C 20
@@ -155,17 +155,20 @@ runner.asm						     Page 1 - 1
 	   7C 5C 5F 5F 5F
 	   2F 7C 5F 7C 20
 	   20 7C 5F 7C 0D
-	   0A 0D 0A
+	   0A 0D 0A 00
+ 00000228 4E 6F 77 20 69	introString db "Now in color!", 0Dh, 0Ah, 0Dh, 0Ah
+	   6E 20 63 6F 6C
+	   6F 72 21 0D 0A
+	   0D 0A
 
-
- 00000223  61 20 67 61 6D				db "a game of math and adventure!", 0Dh, 0Ah
+ 00000239  61 20 67 61 6D				db "a game of math and adventure!", 0Dh, 0Ah
 	   65 20 6F 66 20
 	   6D 61 74 68 20
 	   61 6E 64 20 61
 	   64 76 65 6E 74
 	   75 72 65 21 0D
 	   0A
- 00000242  54 72 61 76 65				db "Travel through the world and challenge all the math masters.... if you dare....", 0Dh, 0Ah, 0Dh, 0ah
+ 00000258  54 72 61 76 65				db "Travel through the world and challenge all the math masters.... if you dare....", 0Dh, 0Ah, 0Dh, 0ah
 	   6C 20 74 68 72
 	   6F 75 67 68 20
 	   74 68 65 20 77
@@ -182,10 +185,10 @@ runner.asm						     Page 1 - 1
 	   20 64 61 72 65
 	   2E 2E 2E 2E 0D
 	   0A 0D 0A
- 00000295  54 49 50 53 20				db "TIPS & INFO:", 0Dh, 0Ah
+ 000002AB  54 49 50 53 20				db "TIPS & INFO:", 0Dh, 0Ah
 	   26 20 49 4E 46
 	   4F 3A 0D 0A
- 000002A3  20 2D 20 41 73				db " - Asterisks (*) represent a math master, go up and press space to begin battle", 0Dh, 0Ah
+ 000002B9  20 2D 20 41 73				db " - Asterisks (*) represent a math master, go up and press space to begin battle", 0Dh, 0Ah
 	   74 65 72 69 73
 	   6B 73 20 28 2A
 	   29 20 72 65 70
@@ -202,7 +205,7 @@ runner.asm						     Page 1 - 1
 	   69 6E 20 62 61
 	   74 74 6C 65 0D
 	   0A
- 000002F4  20 2D 20 59 6F				db " - You may want to get some questions wrong here and there, as you win, difficulty and terms per question increase", 0Dh, 0Ah
+ 0000030A  20 2D 20 59 6F				db " - You may want to get some questions wrong here and there, as you win, difficulty and terms per question increase", 0Dh, 0Ah
 	   75 20 6D 61 79
 	   20 77 61 6E 74
 	   20 74 6F 20 67
@@ -226,21 +229,27 @@ runner.asm						     Page 1 - 1
 	   20 69 6E 63 72
 	   65 61 73 65 0D
 	   0A
- 00000368  20 2D 20 50 45				db " - PEMDAS will not work here, equations are evaluated left to right", 0Dh, 0Ah
+ 0000037E  20 2D 20 50 45				db " - PEMDAS now works! How exciting! Go ahead and ask the author how difficult it was to implement!", 0Dh, 0Ah
 	   4D 44 41 53 20
-	   77 69 6C 6C 20
-	   6E 6F 74 20 77
-	   6F 72 6B 20 68
-	   65 72 65 2C 20
-	   65 71 75 61 74
-	   69 6F 6E 73 20
-	   61 72 65 20 65
-	   76 61 6C 75 61
-	   74 65 64 20 6C
-	   65 66 74 20 74
-	   6F 20 72 69 67
-	   68 74 0D 0A
- 000003AD  50 72 65 73 73				db "Press any key to continue...", 0Dh, 0Ah, 0
+	   6E 6F 77 20 77
+	   6F 72 6B 73 21
+	   20 48 6F 77 20
+	   65 78 63 69 74
+	   69 6E 67 21 20
+	   47 6F 20 61 68
+	   65 61 64 20 61
+	   6E 64 20 61 73
+	   6B 20 74 68 65
+	   20 61 75 74 68
+	   6F 72 20 68 6F
+	   77 20 64 69 66
+	   66 69 63 75 6C
+	   74 20 69 74 20
+	   77 61 73 20 74
+	   6F 20 69 6D 70
+	   6C 65 6D 65 6E
+	   74 21 0D 0A
+ 000003E1  50 72 65 73 73				db "Press any key to continue...", 0Dh, 0Ah, 0
 	   20 61 6E 79 20
 	   6B 65 79 20 74
 	   6F 20 63 6F 6E
@@ -249,7 +258,7 @@ runner.asm						     Page 1 - 1
 	   00
 						
 
- 000003CC 43 6F 72 72 65	correctAnswerString db "Correct! Math masters hear your name world wide and prepare in anticipation of your arrival...", 0
+ 00000400 43 6F 72 72 65	correctAnswerString db "Correct! Math masters hear your name world wide and prepare in anticipation of your arrival...", 0
 	   63 74 21 20 4D
 	   61 74 68 20 6D
 	   61 73 74 65 72
@@ -268,7 +277,7 @@ runner.asm						     Page 1 - 1
 	   6F 75 72 20 61
 	   72 72 69 76 61
 	   6C 2E 2E 2E 00
- 0000042B 49 6E 63 6F 72	incorrectAnswerString db "Incorrect! The world is doomed to a future of math illiteracy...", 0
+ 0000045F 49 6E 63 6F 72	incorrectAnswerString db "Incorrect! The world is doomed to a future of math illiteracy...", 0
 	   72 65 63 74 21
 	   20 54 68 65 20
 	   77 6F 72 6C 64
@@ -282,50 +291,50 @@ runner.asm						     Page 1 - 1
 	   74 65 72 61 63
 	   79 2E 2E 2E 00
 
- 0000046C 77 6F 72 6C 64	filename BYTE "world.txt",0
+ 000004A0 77 6F 72 6C 64	filename BYTE "world.txt",0
 	   2E 74 78 74 00
- 00000476  00001388 [		buffer BYTE 5000 DUP(?)
+ 000004AA  00001388 [		buffer BYTE 5000 DUP(?)
 	    00
 	   ]
- 000017FE 00000000		fileHandle DWORD ?
- 00001802 00000000		bytesRead DWORD ?
+ 00001832 00000000		fileHandle DWORD ?
+ 00001836 00000000		bytesRead DWORD ?
 
- 00001806 6D 61 74 68 70	phrasesfilename BYTE "mathphrases.txt",0
+ 0000183A 6D 61 74 68 70	phrasesfilename BYTE "mathphrases.txt",0
 	   68 72 61 73 65
 	   73 2E 74 78 74
 	   00
- 00001816  00001388 [		phrasesbuffer BYTE 5000 DUP(?)
+ 0000184A  00001388 [		phrasesbuffer BYTE 5000 DUP(?)
 	    00
 	   ]
- 00002B9E 00000000		phrasesfileHandle DWORD ?
- 00002BA2 00000000		phrasesbytesRead DWORD ?
- 00002BA6 00000000		phraseStart DWORD ?
- 00002BAA 00000000		phraseEnd DWORD ?
+ 00002BD2 00000000		phrasesfileHandle DWORD ?
+ 00002BD6 00000000		phrasesbytesRead DWORD ?
+ 00002BDA 00000000		phraseStart DWORD ?
+ 00002BDE 00000000		phraseEnd DWORD ?
 
- 00002BAE 00000000		starPos DWORD ?
- 00002BB2 00			totalStars BYTE 0
- 00002BB3 00			oldX BYTE ?
- 00002BB4 00			oldY BYTE ?
- 00002BB5 50			maxX BYTE 80
- 00002BB6 19			maxY BYTE 25
- 00002BB7 01			xPos BYTE 1
- 00002BB8 01			yPos BYTE 1
+ 00002BE2 00000000		starPos DWORD ?
+ 00002BE6 00			totalStars BYTE 0
+ 00002BE7 00			oldX BYTE ?
+ 00002BE8 00			oldY BYTE ?
+ 00002BE9 50			maxX BYTE 80
+ 00002BEA 19			maxY BYTE 25
+ 00002BEB 01			xPos BYTE 1
+ 00002BEC 01			yPos BYTE 1
 
- 00002BB9 02			difficultyLevel BYTE 2
+ 00002BED 02			difficultyLevel BYTE 2
 
- 00002BBA 00			currentTerm BYTE ?
- 00002BBB  00000064 [		termArr db 100 DUP(?)
+ 00002BEE 00			currentTerm BYTE ?
+ 00002BEF  00000064 [		termArr db 100 DUP(?)
 	    00
 	   ]
- 00002C1F  00000064 [		operators db 100 DUP(?)
+ 00002C53  00000064 [		operators db 100 DUP(?)
 	    00
 	   ]
 
- 00002C83 00			equationAnswer BYTE ?			; Variable to store the answer to the equation
- 00002C84 00			terms BYTE ?					; Number of terms in the equation
- 00002C85 00			operator BYTE ?					; Equation operator code
- 00002C86 00			term BYTE ?						; Equation term
- 00002C87  00001388 [		equationBuffer BYTE 5000 DUP(?) ; Buffer to store the equation
+ 00002CB7 00			equationAnswer BYTE ?			; Variable to store the answer to the equation
+ 00002CB8 00			terms BYTE ?					; Number of terms in the equation
+ 00002CB9 00			operator BYTE ?					; Equation operator code
+ 00002CBA 00			term BYTE ?						; Equation term
+ 00002CBB  00001388 [		equationBuffer BYTE 5000 DUP(?) ; Buffer to store the equation
 	    00
 	   ]
 
@@ -357,6 +366,22 @@ runner.asm						     Page 1 - 1
 				    mov [var], al				; Move the content of EAX to var
 				ENDM
 
+				RemoveBufferElement MACRO position
+					; Calculate start of the shift
+					mov esi, position	; Load the address of the next element into ESI
+					inc esi
+					mov edi, position		; Load the address of the current element into EDI
+
+					; Set up for loop to shift all subsequent bytes left by one
+					.WHILE BYTE PTR [edi] != 0FFh
+						mov al, BYTE PTR [esi]	; Load byte at source position
+						mov BYTE PTR [edi], al	; Store it into destination position
+						inc esi			; Move to next source position
+						inc edi			; Move to next destination position
+					.ENDW
+
+					mov BYTE PTR [edi], 0	; Clear the last byte
+				ENDM
 
 
  00000000			.code
@@ -364,14 +389,14 @@ runner.asm						     Page 1 - 1
  00000000			main PROC
 					
  00000000  E8 00000089			call HideCursor
- 00000005  E8 000003B6			call PrepareWorld
- 0000000A  E8 000004CB			call PreparePhrases
- 0000000F  E8 000003EF			call CountStars
+ 00000005  E8 00000428			call PrepareWorld
+ 0000000A  E8 0000053D			call PreparePhrases
+ 0000000F  E8 00000461			call CountStars
 
  00000014  E8 00000096			call IntroScreen
 
- 00000019  E8 0000040D			call DrawWorld
- 0000001E  E8 000000A3			call InitDotPosition
+ 00000019  E8 0000047F			call DrawWorld
+ 0000001E  E8 00000115			call InitDotPosition
 					
  00000023  B2 55			mov dl, 85
  00000025  B6 05			mov dh, 5
@@ -382,7 +407,7 @@ runner.asm						     Page 1 - 1
  0000002C  B8 00000010				mov eax, 16
  00000031  E8 00000000 E			call Delay
 						;call DrawInfo
- 00000036  E8 000000A9				call MoveDot
+ 00000036  E8 0000011B				call MoveDot
 						.IF totalStars == 0
  00000044  EB 02					jmp Outro
 						.ENDIF
@@ -436,830 +461,875 @@ runner.asm						     Page 1 - 1
  000000AF			HideCursor ENDP
 
  000000AF			IntroScreen PROC
+ 000000AF  BA 000000AC R		mov edx, OFFSET introString0
+ 000000B4  E8 00000000 E		call WriteString
+
 					; Clear screen and write intro message
- 000000AF  E8 00000000 E		call Clrscr
- 000000B4  BA 000000AC R		mov edx, OFFSET introString
- 000000B9  E8 00000000 E		call WriteString
+ 000000B9  E8 00000000 E		call Clrscr
+					; Print titleString in varying colors
+ 000000BE  66| B9 0004			mov cx, 4		  ; Attribute for red color
+ 000000C2  E8 FFFFFFA8			call SetColor
+ 000000C7  BA 000000BE R		mov edx, OFFSET titleString1
+ 000000CC  E8 00000000 E		call WriteString
+
+ 000000D1  66| B9 0006			mov cx, 6		; Attribute for orange color
+ 000000D5  E8 FFFFFF95			call SetColor
+ 000000DA  BA 00000106 R		mov edx, OFFSET titleString2
+ 000000DF  E8 00000000 E		call WriteString
+
+ 000000E4  66| B9 000E			mov cx, 14		; Attribute for yellow color
+ 000000E8  E8 FFFFFF82			call SetColor
+ 000000ED  BA 0000014E R		mov edx, OFFSET titleString3
+ 000000F2  E8 00000000 E		call WriteString 
+
+ 000000F7  66| B9 0002			mov cx, 2		; Attribute for green color
+ 000000FB  E8 FFFFFF6F			call SetColor
+ 00000100  BA 00000196 R		mov edx, OFFSET titleString4
+ 00000105  E8 00000000 E		call WriteString
+
+ 0000010A  66| B9 0001			mov cx, 1		; Attribute for blue color
+ 0000010E  E8 FFFFFF5C			call SetColor
+ 00000113  BA 000001DE R		mov edx, OFFSET titleString5
+ 00000118  E8 00000000 E		call WriteString
+
+					; Reset text color to white on black
+ 0000011D  66| B9 000F			mov cx, 15         ; Attribute for bright white on black
+ 00000121  E8 FFFFFF49			call SetColor
+
+
+ 00000126  BA 00000228 R		mov edx, OFFSET introString
+ 0000012B  E8 00000000 E		call WriteString
 
 
 					;Wait for key press before exiting intro screen
- 000000BE				WaitLoop:
- 000000BE  E8 00000000 E		call ReadKey
- 000000C3  74 F9			jz WaitLoop
+ 00000130				WaitLoop:
+ 00000130  E8 00000000 E		call ReadKey
+ 00000135  74 F9			jz WaitLoop
 
- 000000C5  C3				ret
- 000000C6			IntroScreen ENDP
+ 00000137  C3				ret
+ 00000138			IntroScreen ENDP
 
- 000000C6			InitDotPosition PROC
- 000000C6  BA 00000000			mov edx, 0
- 000000CB  8A 15 00002BB7 R		mov dl ,xPos
- 000000D1  8A 35 00002BB8 R		mov dh, yPos
- 000000D7  E8 00000000 E		call Gotoxy
- 000000DC  B0 2E			mov al, '.'
- 000000DE  E8 00000000 E		call WriteChar
- 000000E3  C3				ret
- 000000E4			InitDotPosition ENDP
+ 00000138			InitDotPosition PROC
+ 00000138  BA 00000000			mov edx, 0
+ 0000013D  8A 15 00002BEB R		mov dl ,xPos
+ 00000143  8A 35 00002BEC R		mov dh, yPos
+ 00000149  E8 00000000 E		call Gotoxy
+ 0000014E  B0 2E			mov al, '.'
+ 00000150  E8 00000000 E		call WriteChar
+ 00000155  C3				ret
+ 00000156			InitDotPosition ENDP
 
- 000000E4			MoveDot PROC
- 000000E4  E8 00000000 E		call ReadKey
- 000000E9  0F 84 0000028E		jz RedrawDot
+ 00000156			MoveDot PROC
+ 00000156  E8 00000000 E		call ReadKey
+ 0000015B  0F 84 0000028E		jz RedrawDot
 
 					; Save old position
- 000000EF  8A 15 00002BB7 R		mov dl, xPos
- 000000F5  88 15 00002BB3 R		mov oldX, dl
- 000000FB  8A 35 00002BB8 R		mov dh, yPos
- 00000101  88 35 00002BB4 R		mov oldY, dh
+ 00000161  8A 15 00002BEB R		mov dl, xPos
+ 00000167  88 15 00002BE7 R		mov oldX, dl
+ 0000016D  8A 35 00002BEC R		mov dh, yPos
+ 00000173  88 35 00002BE8 R		mov oldY, dh
 
 					; Check direction based on virtual scan code (AH)
- 00000107  80 FC 48		    cmp  ah, 48h        ; Up arrow
- 0000010A  0F 84 0000013B	    je   MoveUp
- 00000110  80 FC 50		    cmp  ah, 50h        ; Down arrow
- 00000113  0F 84 00000188	    je   MoveDown
- 00000119  80 FC 4B		    cmp  ah, 4Bh        ; Left arrow
- 0000011C  0F 84 000001D8	    je   MoveLeft
- 00000122  80 FC 4D		    cmp  ah, 4Dh        ; Right arrow
- 00000125  0F 84 0000020F	    je   MoveRight
- 0000012B  80 FC 39			cmp  ah, 39h		; Space
- 0000012E  74 05		          	je	 CheckStar
+ 00000179  80 FC 48		    cmp  ah, 48h        ; Up arrow
+ 0000017C  0F 84 0000013B	    je   MoveUp
+ 00000182  80 FC 50		    cmp  ah, 50h        ; Down arrow
+ 00000185  0F 84 00000188	    je   MoveDown
+ 0000018B  80 FC 4B		    cmp  ah, 4Bh        ; Left arrow
+ 0000018E  0F 84 000001D8	    je   MoveLeft
+ 00000194  80 FC 4D		    cmp  ah, 4Dh        ; Right arrow
+ 00000197  0F 84 0000020F	    je   MoveRight
+ 0000019D  80 FC 39			cmp  ah, 39h		; Space
+ 000001A0  74 05		          	je	 CheckStar
 					
- 00000130  E9 00000248			jmp RedrawDot			; Check for new input if none matched
+ 000001A2  E9 00000248			jmp RedrawDot			; Check for new input if none matched
 
- 00000135				CheckStar:
+ 000001A7				CheckStar:
 						; Check if the dot is next to a star
 						GetBufferPos
- 00000135  0F B6 05	     1		movzx eax, maxX	; move max X into eax
-	   00002BB5 R
- 0000013C  83 C0 02	     1		add eax, 2		; add 2 to account for new line characters
- 0000013F  0F B6 3D	     1		movzx edi, yPos	; move y into edi
-	   00002BB8 R
- 00000146  8B DA	     1		mov ebx, edx
- 00000148  F7 E7	     1		mul edi			; multiply y by max x to get right row
- 0000014A  8B D3	     1		mov edx, ebx
- 0000014C  8B F8	     1		mov edi, eax	; mov mul result back into edi
- 0000014E  0F B6 05	     1		movzx eax, xPos	; zero extend xpos to add to edi
-	   00002BB7 R
- 00000155  03 F8	     1		add edi, eax	; add x to edi to get proper index
+ 000001A7  0F B6 05	     1		movzx eax, maxX	; move max X into eax
+	   00002BE9 R
+ 000001AE  83 C0 02	     1		add eax, 2		; add 2 to account for new line characters
+ 000001B1  0F B6 3D	     1		movzx edi, yPos	; move y into edi
+	   00002BEC R
+ 000001B8  8B DA	     1		mov ebx, edx
+ 000001BA  F7 E7	     1		mul edi			; multiply y by max x to get right row
+ 000001BC  8B D3	     1		mov edx, ebx
+ 000001BE  8B F8	     1		mov edi, eax	; mov mul result back into edi
+ 000001C0  0F B6 05	     1		movzx eax, xPos	; zero extend xpos to add to edi
+	   00002BEB R
+ 000001C7  03 F8	     1		add edi, eax	; add x to edi to get proper index
 
 						; Place length of one row into eax
- 00000157  0F B6 1D				movzx ebx, maxX	; move max X into eax
-	   00002BB5 R
- 0000015E  83 C3 02				add ebx, 2		; add 2 to account for new line characters
+ 000001C9  0F B6 1D				movzx ebx, maxX	; move max X into eax
+	   00002BE9 R
+ 000001D0  83 C3 02				add ebx, 2		; add 2 to account for new line characters
 
 						; Check Above
- 00000161  2B FB				sub edi, ebx	; subtract by one row to check above
- 00000163  8A 87 00000476 R			mov al, byte ptr [buffer + edi]
- 00000169  3C 2A				cmp al, '*'
- 0000016B  74 2D				je checkPass
+ 000001D3  2B FB				sub edi, ebx	; subtract by one row to check above
+ 000001D5  8A 87 000004AA R			mov al, byte ptr [buffer + edi]
+ 000001DB  3C 2A				cmp al, '*'
+ 000001DD  74 2D				je checkPass
 
- 0000016D  03 FB				add edi, ebx	; add back to edi to return to original position
+ 000001DF  03 FB				add edi, ebx	; add back to edi to return to original position
 
 
 						; Check Below
- 0000016F  03 FB				add edi, ebx	; add one row to check below
- 00000171  8A 87 00000476 R			mov al, byte ptr [buffer + edi]
- 00000177  3C 2A				cmp al, '*'
- 00000179  74 1F				je checkPass
+ 000001E1  03 FB				add edi, ebx	; add one row to check below
+ 000001E3  8A 87 000004AA R			mov al, byte ptr [buffer + edi]
+ 000001E9  3C 2A				cmp al, '*'
+ 000001EB  74 1F				je checkPass
 
- 0000017B  2B FB				sub edi, ebx	; subtract by one row to return to original position
+ 000001ED  2B FB				sub edi, ebx	; subtract by one row to return to original position
 
 
 						; Check Left
- 0000017D  4F					dec edi			; move x left one to check left
- 0000017E  8A 87 00000476 R			mov al, byte ptr [buffer + edi]
- 00000184  3C 2A				cmp al, '*'
- 00000186  74 12				je checkPass
+ 000001EF  4F					dec edi			; move x left one to check left
+ 000001F0  8A 87 000004AA R			mov al, byte ptr [buffer + edi]
+ 000001F6  3C 2A				cmp al, '*'
+ 000001F8  74 12				je checkPass
 
- 00000188  47					inc edi 		; add back to edi to return to original position
+ 000001FA  47					inc edi 		; add back to edi to return to original position
 
 
 						; Check Right
- 00000189  47					inc edi			; move x right one to check right
- 0000018A  8A 87 00000476 R			mov al, byte ptr [buffer + edi]
- 00000190  3C 2A				cmp al, '*'
- 00000192  74 06				je checkPass
+ 000001FB  47					inc edi			; move x right one to check right
+ 000001FC  8A 87 000004AA R			mov al, byte ptr [buffer + edi]
+ 00000202  3C 2A				cmp al, '*'
+ 00000204  74 06				je checkPass
 
- 00000194  4F					dec edi			; subtract by one row to return to original position
+ 00000206  4F					dec edi			; subtract by one row to return to original position
 
 						
- 00000195  E9 000000AC				jmp checkFail
+ 00000207  E9 000000AC				jmp checkFail
 
- 0000019A					checkPass:
+ 0000020C					checkPass:
 						    ; Save the position of the star
- 0000019A  89 3D 00002BAE R				mov starPos, edi
+ 0000020C  89 3D 00002BE2 R				mov starPos, edi
 							; Clear screen, write battle message, show math problem
- 000001A0  E8 00000000 E				call Clrscr
+ 00000212  E8 00000000 E				call Clrscr
 							; Move cursor to top left corner
- 000001A5  B2 00					mov dl, 0
- 000001A7  B6 00					mov dh, 0
- 000001A9  E8 00000000 E				call Gotoxy
+ 00000217  B2 00					mov dl, 0
+ 00000219  B6 00					mov dh, 0
+ 0000021B  E8 00000000 E				call Gotoxy
 							; Write battle message
- 000001AE  E8 000003AD					call PrintRandomPhrase
+ 00000220  E8 000003AD					call PrintRandomPhrase
 							; Show math problem
- 000001B3  B2 00					mov dl, 0
- 000001B5  B6 05					mov dh, 5
- 000001B7  E8 00000000 E				call Gotoxy
- 000001BC  E8 000003C3					call GenerateMathEquation
+ 00000225  B2 00					mov dl, 0
+ 00000227  B6 05					mov dh, 5
+ 00000229  E8 00000000 E				call Gotoxy
+ 0000022E  E8 000003C3					call GenerateMathEquation
 							; Read answer from user
- 000001C1  B2 00					mov dl, 0
- 000001C3  B6 0A					mov dh, 10
- 000001C5  E8 00000000 E				call Gotoxy
- 000001CA  E8 00000000 E				call ReadInt
- 000001CF  71 0C					jno GoodInput
+ 00000233  B2 00					mov dl, 0
+ 00000235  B6 0A					mov dh, 10
+ 00000237  E8 00000000 E				call Gotoxy
+ 0000023C  E8 00000000 E				call ReadInt
+ 00000241  71 0C					jno GoodInput
 
 							;Write error message
- 000001D1  E8 00000000 E				call WriteWindowsMsg
+ 00000243  E8 00000000 E				call WriteWindowsMsg
 							exit
 
 							; If input is good, check against equation answer
- 000001DD						GoodInput:
- 000001DD  3A 05 00002C83 R				cmp al, equationAnswer
- 000001E3  74 02					je CorrectAnswer
+ 0000024F						GoodInput:
+ 0000024F  3A 05 00002CB7 R				cmp al, equationAnswer
+ 00000255  74 02					je CorrectAnswer
 
- 000001E5  EB 2E					jmp IncorrectAnswer
+ 00000257  EB 2E					jmp IncorrectAnswer
 
- 000001E7						CorrectAnswer: 
+ 00000259						CorrectAnswer: 
 							; Write correct answer message, increase difficulty
- 000001E7  8B 3D 00002BAE R				mov edi, starPos
- 000001ED  C6 87 00000476 R				mov byte ptr [buffer + edi], ' '	; Change the star to a space
+ 00000259  8B 3D 00002BE2 R				mov edi, starPos
+ 0000025F  C6 87 000004AA R				mov byte ptr [buffer + edi], ' '	; Change the star to a space
 	   20
- 000001F4  FE 0D 00002BB2 R				dec totalStars
+ 00000266  FE 0D 00002BE6 R				dec totalStars
 
- 000001FA  B2 00					mov dl, 0
- 000001FC  B6 0F					mov dh, 15
- 000001FE  E8 00000000 E				call Gotoxy
- 00000203  BA 000003CC R				mov edx, OFFSET correctAnswerString
- 00000208  E8 00000000 E				call WriteString
- 0000020D  FE 05 00002BB9 R				inc difficultyLevel
- 00000213  EB 19					jmp AnswerChecked
+ 0000026C  B2 00					mov dl, 0
+ 0000026E  B6 0F					mov dh, 15
+ 00000270  E8 00000000 E				call Gotoxy
+ 00000275  BA 00000400 R				mov edx, OFFSET correctAnswerString
+ 0000027A  E8 00000000 E				call WriteString
+ 0000027F  FE 05 00002BED R				inc difficultyLevel
+ 00000285  EB 19					jmp AnswerChecked
 
- 00000215						IncorrectAnswer:
+ 00000287						IncorrectAnswer:
 							; Write incorrect answer message, decrease difficulty
- 00000215  B2 00					mov dl, 0
- 00000217  B6 0F					mov dh, 15
- 00000219  E8 00000000 E				call Gotoxy
- 0000021E  BA 0000042B R				mov edx, OFFSET incorrectAnswerString
- 00000223  E8 00000000 E				call WriteString
- 00000228  FE 0D 00002BB9 R				dec difficultyLevel
+ 00000287  B2 00					mov dl, 0
+ 00000289  B6 0F					mov dh, 15
+ 0000028B  E8 00000000 E				call Gotoxy
+ 00000290  BA 0000045F R				mov edx, OFFSET incorrectAnswerString
+ 00000295  E8 00000000 E				call WriteString
+ 0000029A  FE 0D 00002BED R				dec difficultyLevel
 
- 0000022E						AnswerChecked:
+ 000002A0						AnswerChecked:
 
 							;update terms with difficulty level
- 0000022E  8A 25 00002BB9 R				mov ah, difficultyLevel
- 00000234  88 25 00002C84 R				mov terms, ah
+ 000002A0  8A 25 00002BED R				mov ah, difficultyLevel
+ 000002A6  88 25 00002CB8 R				mov terms, ah
 
 							;Wait for key press before continuing
- 0000023A						WaitLoop:
- 0000023A  E8 00000000 E				call ReadKey
- 0000023F  74 F9					jz WaitLoop
+ 000002AC						WaitLoop:
+ 000002AC  E8 00000000 E				call ReadKey
+ 000002B1  74 F9					jz WaitLoop
 
- 00000241  E8 000001E5					call DrawWorld
+ 000002B3  E8 000001E5					call DrawWorld
 
 
- 00000246					checkFail:
- 00000246  E9 00000132					jmp RedrawDot	
+ 000002B8					checkFail:
+ 000002B8  E9 00000132					jmp RedrawDot	
 
 
 
 					
 					
- 0000024B				MoveUp:
- 0000024B  8A 25 00002BB8 R			mov ah, yPos
- 00000251  80 FC 01				cmp ah, 1
- 00000254  0F 8E 00000123			jle RedrawDot	; If dot cannot move, jump without decrementing
+ 000002BD				MoveUp:
+ 000002BD  8A 25 00002BEC R			mov ah, yPos
+ 000002C3  80 FC 01				cmp ah, 1
+ 000002C6  0F 8E 00000123			jle RedrawDot	; If dot cannot move, jump without decrementing
 
 						GetBufferPos	; Put dot buffer position into edi
- 0000025A  0F B6 05	     1		movzx eax, maxX	; move max X into eax
-	   00002BB5 R
- 00000261  83 C0 02	     1		add eax, 2		; add 2 to account for new line characters
- 00000264  0F B6 3D	     1		movzx edi, yPos	; move y into edi
-	   00002BB8 R
- 0000026B  8B DA	     1		mov ebx, edx
- 0000026D  F7 E7	     1		mul edi			; multiply y by max x to get right row
- 0000026F  8B D3	     1		mov edx, ebx
- 00000271  8B F8	     1		mov edi, eax	; mov mul result back into edi
- 00000273  0F B6 05	     1		movzx eax, xPos	; zero extend xpos to add to edi
-	   00002BB7 R
- 0000027A  03 F8	     1		add edi, eax	; add x to edi to get proper index
+ 000002CC  0F B6 05	     1		movzx eax, maxX	; move max X into eax
+	   00002BE9 R
+ 000002D3  83 C0 02	     1		add eax, 2		; add 2 to account for new line characters
+ 000002D6  0F B6 3D	     1		movzx edi, yPos	; move y into edi
+	   00002BEC R
+ 000002DD  8B DA	     1		mov ebx, edx
+ 000002DF  F7 E7	     1		mul edi			; multiply y by max x to get right row
+ 000002E1  8B D3	     1		mov edx, ebx
+ 000002E3  8B F8	     1		mov edi, eax	; mov mul result back into edi
+ 000002E5  0F B6 05	     1		movzx eax, xPos	; zero extend xpos to add to edi
+	   00002BEB R
+ 000002EC  03 F8	     1		add edi, eax	; add x to edi to get proper index
 
- 0000027C  0F B6 1D				movzx ebx, maxX	; Move max X into ebx
-	   00002BB5 R
- 00000283  83 C3 02				add ebx, 2		; Add 2 to account for new line characters
- 00000286  2B FB				sub edi, ebx 	; Move edi up one row to check above
+ 000002EE  0F B6 1D				movzx ebx, maxX	; Move max X into ebx
+	   00002BE9 R
+ 000002F5  83 C3 02				add ebx, 2		; Add 2 to account for new line characters
+ 000002F8  2B FB				sub edi, ebx 	; Move edi up one row to check above
 
- 00000288  8A 87 00000476 R			mov al, byte ptr [buffer + edi]	; Move the character at the buffer position into al
+ 000002FA  8A 87 000004AA R			mov al, byte ptr [buffer + edi]	; Move the character at the buffer position into al
 
- 0000028E  3C 20				cmp al, ' '
- 00000290  0F 85 000000E7			jne RedrawDot	; If space to be moved into isn't empty, skip
+ 00000300  3C 20				cmp al, ' '
+ 00000302  0F 85 000000E7			jne RedrawDot	; If space to be moved into isn't empty, skip
 
- 00000296  FE 0D 00002BB8 R			dec yPos	
- 0000029C  E9 000000DC				jmp RedrawDot
+ 00000308  FE 0D 00002BEC R			dec yPos	
+ 0000030E  E9 000000DC				jmp RedrawDot
 
- 000002A1				MoveDown:
- 000002A1  8A 25 00002BB8 R			mov ah, yPos
- 000002A7  3A 25 00002BB6 R			cmp ah, [maxY]
- 000002AD  0F 8D 000000CA			jge RedrawDot
+ 00000313				MoveDown:
+ 00000313  8A 25 00002BEC R			mov ah, yPos
+ 00000319  3A 25 00002BEA R			cmp ah, [maxY]
+ 0000031F  0F 8D 000000CA			jge RedrawDot
 
 						GetBufferPos	; Put dot buffer position into edi
- 000002B3  0F B6 05	     1		movzx eax, maxX	; move max X into eax
-	   00002BB5 R
- 000002BA  83 C0 02	     1		add eax, 2		; add 2 to account for new line characters
- 000002BD  0F B6 3D	     1		movzx edi, yPos	; move y into edi
-	   00002BB8 R
- 000002C4  8B DA	     1		mov ebx, edx
- 000002C6  F7 E7	     1		mul edi			; multiply y by max x to get right row
- 000002C8  8B D3	     1		mov edx, ebx
- 000002CA  8B F8	     1		mov edi, eax	; mov mul result back into edi
- 000002CC  0F B6 05	     1		movzx eax, xPos	; zero extend xpos to add to edi
-	   00002BB7 R
- 000002D3  03 F8	     1		add edi, eax	; add x to edi to get proper index
+ 00000325  0F B6 05	     1		movzx eax, maxX	; move max X into eax
+	   00002BE9 R
+ 0000032C  83 C0 02	     1		add eax, 2		; add 2 to account for new line characters
+ 0000032F  0F B6 3D	     1		movzx edi, yPos	; move y into edi
+	   00002BEC R
+ 00000336  8B DA	     1		mov ebx, edx
+ 00000338  F7 E7	     1		mul edi			; multiply y by max x to get right row
+ 0000033A  8B D3	     1		mov edx, ebx
+ 0000033C  8B F8	     1		mov edi, eax	; mov mul result back into edi
+ 0000033E  0F B6 05	     1		movzx eax, xPos	; zero extend xpos to add to edi
+	   00002BEB R
+ 00000345  03 F8	     1		add edi, eax	; add x to edi to get proper index
 
- 000002D5  0F B6 1D				movzx ebx, maxX	; Move max X into ebx
-	   00002BB5 R
- 000002DC  83 C3 02				add ebx, 2		; Add 2 to account for new line characters
- 000002DF  03 FB				add edi, ebx 	; Move edi down one row to check below
+ 00000347  0F B6 1D				movzx ebx, maxX	; Move max X into ebx
+	   00002BE9 R
+ 0000034E  83 C3 02				add ebx, 2		; Add 2 to account for new line characters
+ 00000351  03 FB				add edi, ebx 	; Move edi down one row to check below
 
- 000002E1  8A 87 00000476 R			mov al, byte ptr [buffer + edi]	; Move the character at the buffer position into al
+ 00000353  8A 87 000004AA R			mov al, byte ptr [buffer + edi]	; Move the character at the buffer position into al
 
 						
- 000002E7  3C 20				cmp al, ' '
- 000002E9  0F 85 0000008E			jne RedrawDot
+ 00000359  3C 20				cmp al, ' '
+ 0000035B  0F 85 0000008E			jne RedrawDot
 
- 000002EF  FE 05 00002BB8 R			inc yPos
- 000002F5  E9 00000083				jmp RedrawDot
+ 00000361  FE 05 00002BEC R			inc yPos
+ 00000367  E9 00000083				jmp RedrawDot
 
- 000002FA				MoveLeft:
- 000002FA  8A 25 00002BB7 R			mov ah, xPos
- 00000300  80 FC 01				cmp ah, 1
- 00000303  7E 78				jle RedrawDot
+ 0000036C				MoveLeft:
+ 0000036C  8A 25 00002BEB R			mov ah, xPos
+ 00000372  80 FC 01				cmp ah, 1
+ 00000375  7E 78				jle RedrawDot
 
 						GetBufferPos	; Put dot buffer position into edi
- 00000305  0F B6 05	     1		movzx eax, maxX	; move max X into eax
-	   00002BB5 R
- 0000030C  83 C0 02	     1		add eax, 2		; add 2 to account for new line characters
- 0000030F  0F B6 3D	     1		movzx edi, yPos	; move y into edi
-	   00002BB8 R
- 00000316  8B DA	     1		mov ebx, edx
- 00000318  F7 E7	     1		mul edi			; multiply y by max x to get right row
- 0000031A  8B D3	     1		mov edx, ebx
- 0000031C  8B F8	     1		mov edi, eax	; mov mul result back into edi
- 0000031E  0F B6 05	     1		movzx eax, xPos	; zero extend xpos to add to edi
-	   00002BB7 R
- 00000325  03 F8	     1		add edi, eax	; add x to edi to get proper index
+ 00000377  0F B6 05	     1		movzx eax, maxX	; move max X into eax
+	   00002BE9 R
+ 0000037E  83 C0 02	     1		add eax, 2		; add 2 to account for new line characters
+ 00000381  0F B6 3D	     1		movzx edi, yPos	; move y into edi
+	   00002BEC R
+ 00000388  8B DA	     1		mov ebx, edx
+ 0000038A  F7 E7	     1		mul edi			; multiply y by max x to get right row
+ 0000038C  8B D3	     1		mov edx, ebx
+ 0000038E  8B F8	     1		mov edi, eax	; mov mul result back into edi
+ 00000390  0F B6 05	     1		movzx eax, xPos	; zero extend xpos to add to edi
+	   00002BEB R
+ 00000397  03 F8	     1		add edi, eax	; add x to edi to get proper index
 
- 00000327  4F					dec edi			; move x left one to account for move
+ 00000399  4F					dec edi			; move x left one to account for move
 
- 00000328  8A 87 00000476 R			mov al, byte ptr [buffer + edi]	; Move the character at the buffer position into al
+ 0000039A  8A 87 000004AA R			mov al, byte ptr [buffer + edi]	; Move the character at the buffer position into al
 						
- 0000032E  3C 20				cmp al, ' '
- 00000330  75 4B				jne RedrawDot
+ 000003A0  3C 20				cmp al, ' '
+ 000003A2  75 4B				jne RedrawDot
 
- 00000332  FE 0D 00002BB7 R			dec xPos
- 00000338  EB 43				jmp RedrawDot
+ 000003A4  FE 0D 00002BEB R			dec xPos
+ 000003AA  EB 43				jmp RedrawDot
 
- 0000033A				MoveRight:
- 0000033A  8A 25 00002BB7 R			mov ah, xPos
- 00000340  3A 25 00002BB5 R			cmp ah, [maxX]
- 00000346  7D 35				jge RedrawDot
+ 000003AC				MoveRight:
+ 000003AC  8A 25 00002BEB R			mov ah, xPos
+ 000003B2  3A 25 00002BE9 R			cmp ah, [maxX]
+ 000003B8  7D 35				jge RedrawDot
 
 						GetBufferPos 	; Put dot buffer position into edi
- 00000348  0F B6 05	     1		movzx eax, maxX	; move max X into eax
-	   00002BB5 R
- 0000034F  83 C0 02	     1		add eax, 2		; add 2 to account for new line characters
- 00000352  0F B6 3D	     1		movzx edi, yPos	; move y into edi
-	   00002BB8 R
- 00000359  8B DA	     1		mov ebx, edx
- 0000035B  F7 E7	     1		mul edi			; multiply y by max x to get right row
- 0000035D  8B D3	     1		mov edx, ebx
- 0000035F  8B F8	     1		mov edi, eax	; mov mul result back into edi
- 00000361  0F B6 05	     1		movzx eax, xPos	; zero extend xpos to add to edi
-	   00002BB7 R
- 00000368  03 F8	     1		add edi, eax	; add x to edi to get proper index
+ 000003BA  0F B6 05	     1		movzx eax, maxX	; move max X into eax
+	   00002BE9 R
+ 000003C1  83 C0 02	     1		add eax, 2		; add 2 to account for new line characters
+ 000003C4  0F B6 3D	     1		movzx edi, yPos	; move y into edi
+	   00002BEC R
+ 000003CB  8B DA	     1		mov ebx, edx
+ 000003CD  F7 E7	     1		mul edi			; multiply y by max x to get right row
+ 000003CF  8B D3	     1		mov edx, ebx
+ 000003D1  8B F8	     1		mov edi, eax	; mov mul result back into edi
+ 000003D3  0F B6 05	     1		movzx eax, xPos	; zero extend xpos to add to edi
+	   00002BEB R
+ 000003DA  03 F8	     1		add edi, eax	; add x to edi to get proper index
 
- 0000036A  47					inc edi			; move x right one to account for move
+ 000003DC  47					inc edi			; move x right one to account for move
 
- 0000036B  8A 87 00000476 R			mov al, byte ptr [buffer + edi]	; Move the character at the buffer position into al
+ 000003DD  8A 87 000004AA R			mov al, byte ptr [buffer + edi]	; Move the character at the buffer position into al
 						
- 00000371  3C 20				cmp al, ' '
- 00000373  75 08				jne RedrawDot
+ 000003E3  3C 20				cmp al, ' '
+ 000003E5  75 08				jne RedrawDot
 
- 00000375  FE 05 00002BB7 R			inc xPos
- 0000037B  EB 00				jmp RedrawDot
+ 000003E7  FE 05 00002BEB R			inc xPos
+ 000003ED  EB 00				jmp RedrawDot
 
- 0000037D				RedrawDot:
- 0000037D  8A 15 00002BB3 R			mov dl, oldX
- 00000383  8A 35 00002BB4 R			mov dh, oldY
- 00000389  E8 00000000 E			call Gotoxy
- 0000038E  B0 20				mov al, ' '
- 00000390  E8 00000000 E			call WriteChar	; Write space over old dot
+ 000003EF				RedrawDot:
+ 000003EF  8A 15 00002BE7 R			mov dl, oldX
+ 000003F5  8A 35 00002BE8 R			mov dh, oldY
+ 000003FB  E8 00000000 E			call Gotoxy
+ 00000400  B0 20				mov al, ' '
+ 00000402  E8 00000000 E			call WriteChar	; Write space over old dot
 
 						; Set text color to red
- 00000395  66| B9 0004				mov cx, 4          ; Attribute for red color
- 00000399  E8 FFFFFCD1				call SetColor
+ 00000407  66| B9 0004				mov cx, 4          ; Attribute for red color
+ 0000040B  E8 FFFFFC5F				call SetColor
 
- 0000039E  8A 15 00002BB7 R			mov dl, xPos
- 000003A4  8A 35 00002BB8 R			mov dh, yPos
- 000003AA  E8 00000000 E			call Gotoxy		; Go to new xy
- 000003AF  B0 2E				mov al, '.'
- 000003B1  E8 00000000 E			call WriteChar	; Write dot in new xy
+ 00000410  8A 15 00002BEB R			mov dl, xPos
+ 00000416  8A 35 00002BEC R			mov dh, yPos
+ 0000041C  E8 00000000 E			call Gotoxy		; Go to new xy
+ 00000421  B0 2E				mov al, '.'
+ 00000423  E8 00000000 E			call WriteChar	; Write dot in new xy
 
 						; Reset text color to white on black
- 000003B6  66| B9 000F				mov cx, 15         ; Attribute for bright white on black
- 000003BA  E8 FFFFFCB0				call SetColor
+ 00000428  66| B9 000F				mov cx, 15         ; Attribute for bright white on black
+ 0000042C  E8 FFFFFC3E				call SetColor
 						
- 000003BF  C3				ret
- 000003C0			MoveDot ENDP
+ 00000431  C3				ret
+ 00000432			MoveDot ENDP
 
- 000003C0			PrepareWorld PROC
+ 00000432			PrepareWorld PROC
 					; Open the file for reading
- 000003C0  BA 0000046C R		mov edx, OFFSET filename      ; Pointer to filename
- 000003C5  E8 00000000 E		call OpenInputFile                 ; OpenFile is used for reading; adjust if needed
- 000003CA  A3 000017FE R		mov fileHandle, eax            ; Save file handle
+ 00000432  BA 000004A0 R		mov edx, OFFSET filename      ; Pointer to filename
+ 00000437  E8 00000000 E		call OpenInputFile                 ; OpenFile is used for reading; adjust if needed
+ 0000043C  A3 00001832 R		mov fileHandle, eax            ; Save file handle
 
 					; Read from the file
- 000003CF  A1 000017FE R		mov eax, fileHandle            ; File handle
- 000003D4  BA 00000476 R		mov edx, OFFSET buffer         ; Buffer to store file data
- 000003D9  B9 00001388			mov ecx, SIZEOF buffer         ; Max bytes to read
- 000003DE  E8 00000000 E		call ReadFromFile              ; Read file content
- 000003E3  A3 00001802 R		mov bytesRead, eax             ; Save the number of bytes read
- 000003E8  72 02			jc   readError                 ; Jump if error occurred
- 000003EA  EB 0C			jmp readSuccess
+ 00000441  A1 00001832 R		mov eax, fileHandle            ; File handle
+ 00000446  BA 000004AA R		mov edx, OFFSET buffer         ; Buffer to store file data
+ 0000044B  B9 00001388			mov ecx, SIZEOF buffer         ; Max bytes to read
+ 00000450  E8 00000000 E		call ReadFromFile              ; Read file content
+ 00000455  A3 00001836 R		mov bytesRead, eax             ; Save the number of bytes read
+ 0000045A  72 02			jc   readError                 ; Jump if error occurred
+ 0000045C  EB 0C			jmp readSuccess
 
- 000003EC				readError:
- 000003EC  E8 00000000 E			call WriteWindowsMsg
+ 0000045E				readError:
+ 0000045E  E8 00000000 E			call WriteWindowsMsg
 						exit
 
- 000003F8				readSuccess:
+ 0000046A				readSuccess:
 
 					; Close the file
- 000003F8  A1 000017FE R		mov eax, fileHandle
- 000003FD  E8 00000000 E		call CloseFile
+ 0000046A  A1 00001832 R		mov eax, fileHandle
+ 0000046F  E8 00000000 E		call CloseFile
 
- 00000402  C3				ret
- 00000403			PrepareWorld ENDP
+ 00000474  C3				ret
+ 00000475			PrepareWorld ENDP
 
- 00000403				CountStars PROC
- 00000403  33 FF				xor edi, edi                ; Clear edi for use as index
- 00000405  8B 0D 00001802 R			mov ecx, bytesRead          ; Length of the buffer to print
+ 00000475				CountStars PROC
+ 00000475  33 FF				xor edi, edi                ; Clear edi for use as index
+ 00000477  8B 0D 00001836 R			mov ecx, bytesRead          ; Length of the buffer to print
 
 						; Clear Screen before drawing
- 0000040B  E8 00000000 E			call Clrscr
- 00000410				CountLoop:
- 00000410  3B F9				cmp edi, ecx                ; Check if we've reached the end of the buffer
- 00000412  74 16				je EndCount                  ; Jump to end if done
+ 0000047D  E8 00000000 E			call Clrscr
+ 00000482				CountLoop:
+ 00000482  3B F9				cmp edi, ecx                ; Check if we've reached the end of the buffer
+ 00000484  74 16				je EndCount                  ; Jump to end if done
 
- 00000414  8A 87 00000476 R			mov al, byte ptr [buffer + edi] ; Move the current character to eax, zero-extend to prevent sign extension
- 0000041A  3C 2A				cmp al, '*'
- 0000041C  74 03				je CountStar
+ 00000486  8A 87 000004AA R			mov al, byte ptr [buffer + edi] ; Move the current character to eax, zero-extend to prevent sign extension
+ 0000048C  3C 2A				cmp al, '*'
+ 0000048E  74 03				je CountStar
 
- 0000041E  47					inc edi                     ; Move to the next character
- 0000041F  EB EF				jmp CountLoop                ; Continue loop
+ 00000490  47					inc edi                     ; Move to the next character
+ 00000491  EB EF				jmp CountLoop                ; Continue loop
 
- 00000421				CountStar:
- 00000421  FE 05 00002BB2 R			inc totalStars
- 00000427  47					inc edi
- 00000428  EB E6				jmp CountLoop
+ 00000493				CountStar:
+ 00000493  FE 05 00002BE6 R			inc totalStars
+ 00000499  47					inc edi
+ 0000049A  EB E6				jmp CountLoop
 
- 0000042A				EndCount:
+ 0000049C				EndCount:
 
 
- 0000042A  C3				ret
- 0000042B			CountStars ENDP
+ 0000049C  C3				ret
+ 0000049D			CountStars ENDP
 
- 0000042B			DrawWorld PROC	
+ 0000049D			DrawWorld PROC	
 					;Buffer contains the worlds information
- 0000042B  33 FF			xor edi, edi                ; Clear edi for use as index
- 0000042D  8B 1D 00001802 R	    mov ebx, bytesRead          ; Length of the buffer to print
+ 0000049D  33 FF			xor edi, edi                ; Clear edi for use as index
+ 0000049F  8B 1D 00001836 R	    mov ebx, bytesRead          ; Length of the buffer to print
 
 					; Clear Screen before drawing
- 00000433  E8 00000000 E		call Clrscr
- 00000438			DrawLoop:
- 00000438  3B FB		    cmp edi, ebx                ; Check if we've reached the end of the buffer
- 0000043A  74 2F		    je EndDraw                  ; Jump to end if done
+ 000004A5  E8 00000000 E		call Clrscr
+ 000004AA			DrawLoop:
+ 000004AA  3B FB		    cmp edi, ebx                ; Check if we've reached the end of the buffer
+ 000004AC  74 2F		    je EndDraw                  ; Jump to end if done
 
- 0000043C  8A 87 00000476 R	    mov al, byte ptr [buffer + edi] ; Move the current character to eax, zero-extend to prevent sign extension
+ 000004AE  8A 87 000004AA R	    mov al, byte ptr [buffer + edi] ; Move the current character to eax, zero-extend to prevent sign extension
 
- 00000442  3C 2A			cmp al, '*'
- 00000444  74 02			je WriteYellow
+ 000004B4  3C 2A			cmp al, '*'
+ 000004B6  74 02			je WriteYellow
 
- 00000446  EB 1B			jmp NormalWrite
+ 000004B8  EB 1B			jmp NormalWrite
 
- 00000448				WriteYellow:
+ 000004BA				WriteYellow:
 					 ; Set text color to yellow
- 00000448  66| B9 000E		    mov cx, 14                 ; Attribute for yellow color
- 0000044C  E8 FFFFFC1E		    call SetColor
- 00000451  B0 2A			mov al, '*'
- 00000453  E8 00000000 E	    call WriteChar             ; Write the asterisk in yellow
+ 000004BA  66| B9 000E		    mov cx, 14                 ; Attribute for yellow color
+ 000004BE  E8 FFFFFBAC		    call SetColor
+ 000004C3  B0 2A			mov al, '*'
+ 000004C5  E8 00000000 E	    call WriteChar             ; Write the asterisk in yellow
 
 					; Reset text color to white on black
- 00000458  66| B9 000F		    mov cx, 15                 ; Attribute for bright white on black
- 0000045C  E8 FFFFFC0E		    call SetColor
+ 000004CA  66| B9 000F		    mov cx, 15                 ; Attribute for bright white on black
+ 000004CE  E8 FFFFFB9C		    call SetColor
 
- 00000461  EB 05			jmp PostWrite
-
-
-
- 00000463				NormalWrite:
- 00000463  E8 00000000 E	    call WriteChar					; Write the character to the 
-
- 00000468				PostWrite:
+ 000004D3  EB 05			jmp PostWrite
 
 
- 00000468  47			    inc edi                     ; Move to the next character
- 00000469  EB CD		    jmp DrawLoop                ; Continue loop
 
- 0000046B			EndDraw:
- 0000046B  C3			    ret
+ 000004D5				NormalWrite:
+ 000004D5  E8 00000000 E	    call WriteChar					; Write the character to the 
 
- 0000046C			DrawWorld ENDP
+ 000004DA				PostWrite:
 
- 0000046C			DrawInfo PROC
- 0000046C  B2 55			mov dl, 85
- 0000046E  B6 00			mov dh, 0
- 00000470  E8 00000000 E		call Gotoxy
- 00000475  0F B6 05			movzx eax, xPos
-	   00002BB7 R
- 0000047C  E8 00000000 E		call WriteInt
 
- 00000481  B2 55			mov dl, 85
- 00000483  B6 01			mov dh, 1
- 00000485  E8 00000000 E		call Gotoxy
- 0000048A  0F B6 05			movzx eax, yPos
-	   00002BB8 R
- 00000491  E8 00000000 E		call WriteInt
+ 000004DA  47			    inc edi                     ; Move to the next character
+ 000004DB  EB CD		    jmp DrawLoop                ; Continue loop
 
- 00000496  B2 55			mov dl, 85
- 00000498  B6 02			mov dh, 2
- 0000049A  E8 00000000 E		call Gotoxy
+ 000004DD			EndDraw:
+ 000004DD  C3			    ret
+
+ 000004DE			DrawWorld ENDP
+
+ 000004DE			DrawInfo PROC
+ 000004DE  B2 55			mov dl, 85
+ 000004E0  B6 00			mov dh, 0
+ 000004E2  E8 00000000 E		call Gotoxy
+ 000004E7  0F B6 05			movzx eax, xPos
+	   00002BEB R
+ 000004EE  E8 00000000 E		call WriteInt
+
+ 000004F3  B2 55			mov dl, 85
+ 000004F5  B6 01			mov dh, 1
+ 000004F7  E8 00000000 E		call Gotoxy
+ 000004FC  0F B6 05			movzx eax, yPos
+	   00002BEC R
+ 00000503  E8 00000000 E		call WriteInt
+
+ 00000508  B2 55			mov dl, 85
+ 0000050A  B6 02			mov dh, 2
+ 0000050C  E8 00000000 E		call Gotoxy
 
 					GetBufferPos
- 0000049F  0F B6 05	     1		movzx eax, maxX	; move max X into eax
-	   00002BB5 R
- 000004A6  83 C0 02	     1		add eax, 2		; add 2 to account for new line characters
- 000004A9  0F B6 3D	     1		movzx edi, yPos	; move y into edi
-	   00002BB8 R
- 000004B0  8B DA	     1		mov ebx, edx
- 000004B2  F7 E7	     1		mul edi			; multiply y by max x to get right row
- 000004B4  8B D3	     1		mov edx, ebx
- 000004B6  8B F8	     1		mov edi, eax	; mov mul result back into edi
- 000004B8  0F B6 05	     1		movzx eax, xPos	; zero extend xpos to add to edi
-	   00002BB7 R
- 000004BF  03 F8	     1		add edi, eax	; add x to edi to get proper index
+ 00000511  0F B6 05	     1		movzx eax, maxX	; move max X into eax
+	   00002BE9 R
+ 00000518  83 C0 02	     1		add eax, 2		; add 2 to account for new line characters
+ 0000051B  0F B6 3D	     1		movzx edi, yPos	; move y into edi
+	   00002BEC R
+ 00000522  8B DA	     1		mov ebx, edx
+ 00000524  F7 E7	     1		mul edi			; multiply y by max x to get right row
+ 00000526  8B D3	     1		mov edx, ebx
+ 00000528  8B F8	     1		mov edi, eax	; mov mul result back into edi
+ 0000052A  0F B6 05	     1		movzx eax, xPos	; zero extend xpos to add to edi
+	   00002BEB R
+ 00000531  03 F8	     1		add edi, eax	; add x to edi to get proper index
 
- 000004C1  4F				dec edi
- 000004C2  8A 87 00000476 R		mov al, byte ptr [buffer + edi]
+ 00000533  4F				dec edi
+ 00000534  8A 87 000004AA R		mov al, byte ptr [buffer + edi]
 					
 					;mWrite "Left: ", 0
 					;call WriteChar
 
- 000004C8  B2 55			mov dl, 85
- 000004CA  B6 03			mov dh, 3
- 000004CC  E8 00000000 E		call Gotoxy
+ 0000053A  B2 55			mov dl, 85
+ 0000053C  B6 03			mov dh, 3
+ 0000053E  E8 00000000 E		call Gotoxy
 
- 000004D1  47				inc edi
- 000004D2  47				inc edi
- 000004D3  8A 87 00000476 R		mov al, byte ptr [buffer + edi]
+ 00000543  47				inc edi
+ 00000544  47				inc edi
+ 00000545  8A 87 000004AA R		mov al, byte ptr [buffer + edi]
 
 					;mWrite "Right: ", 0
 					;call WriteChar
 
 
- 000004D9  C3				ret
- 000004DA			DrawInfo ENDP
+ 0000054B  C3				ret
+ 0000054C			DrawInfo ENDP
 
- 000004DA			PreparePhrases PROC
+ 0000054C			PreparePhrases PROC
 					; Open the file for reading
- 000004DA  BA 00001806 R		mov edx, OFFSET phrasesfilename      ; Pointer to filename
- 000004DF  E8 00000000 E		call OpenInputFile
- 000004E4  A3 00002B9E R		mov phrasesfileHandle, eax
+ 0000054C  BA 0000183A R		mov edx, OFFSET phrasesfilename      ; Pointer to filename
+ 00000551  E8 00000000 E		call OpenInputFile
+ 00000556  A3 00002BD2 R		mov phrasesfileHandle, eax
 
 					; Read from the file
- 000004E9  A1 00002B9E R		mov eax, phrasesfileHandle
- 000004EE  BA 00001816 R		mov edx, OFFSET phrasesbuffer
- 000004F3  B9 00001388			mov ecx, SIZEOF phrasesbuffer
- 000004F8  E8 00000000 E		call ReadFromFile
- 000004FD  A3 00002BA2 R		mov phrasesbytesRead, eax
+ 0000055B  A1 00002BD2 R		mov eax, phrasesfileHandle
+ 00000560  BA 0000184A R		mov edx, OFFSET phrasesbuffer
+ 00000565  B9 00001388			mov ecx, SIZEOF phrasesbuffer
+ 0000056A  E8 00000000 E		call ReadFromFile
+ 0000056F  A3 00002BD6 R		mov phrasesbytesRead, eax
 
 					; Close the file
- 00000502  A1 00002B9E R		mov eax, phrasesfileHandle
- 00000507  E8 00000000 E		call CloseFile
+ 00000574  A1 00002BD2 R		mov eax, phrasesfileHandle
+ 00000579  E8 00000000 E		call CloseFile
 
- 0000050C  C3				ret
+ 0000057E  C3				ret
 
 					; phrasesbuffer contains the phrases information
- 0000050D			PreparePhrases ENDP
+ 0000057F			PreparePhrases ENDP
 
- 0000050D			GetRandomPhrase PROC
+ 0000057F			GetRandomPhrase PROC
 					; Get a random phrase
- 0000050D  E8 00000000 E		call Randomize
- 00000512  B8 0000004F			mov eax, 79
- 00000517  E8 00000000 E		call RandomRange
- 0000051C  8B D8			mov ebx, eax
- 0000051E  43				inc ebx
+ 0000057F  E8 00000000 E		call Randomize
+ 00000584  B8 0000004F			mov eax, 79
+ 00000589  E8 00000000 E		call RandomRange
+ 0000058E  8B D8			mov ebx, eax
+ 00000590  43				inc ebx
 
 					; ebx contains the randomly generated index
 
 					; Find the phrase
- 0000051F  33 FF			xor edi, edi
- 00000521  33 C9			xor ecx, ecx
+ 00000591  33 FF			xor edi, edi
+ 00000593  33 C9			xor ecx, ecx
 					; ecx will contain the current phrase index
 
- 00000523				FindLoop:
+ 00000595				FindLoop:
 						; Find the end of the buffer
- 00000523  3B 3D 00002BA2 R			cmp edi, phrasesbytesRead
- 00000529  74 34				je EndFind
+ 00000595  3B 3D 00002BD6 R			cmp edi, phrasesbytesRead
+ 0000059B  74 34				je EndFind
 
 						; If randomly generated index matches the current phrase index, we found the phrase
- 0000052B  3B D9				cmp ebx, ecx
- 0000052D  74 0E				je FoundPhrase
+ 0000059D  3B D9				cmp ebx, ecx
+ 0000059F  74 0E				je FoundPhrase
 
 						; Check for new line, if not skip to NotNewlineFind
- 0000052F  8A 87 00001816 R			mov al, byte ptr [phrasesbuffer + edi]
- 00000535  3C 0A				cmp al, 0ah ; New line
- 00000537  75 01				jne NotNewLineFind
+ 000005A1  8A 87 0000184A R			mov al, byte ptr [phrasesbuffer + edi]
+ 000005A7  3C 0A				cmp al, 0ah ; New line
+ 000005A9  75 01				jne NotNewLineFind
 
 						; Increment the phrase index
- 00000539  41					inc ecx
+ 000005AB  41					inc ecx
 
- 0000053A				NotNewlineFind:
- 0000053A  47					inc edi			; Increment edi to show a character was read
- 0000053B  EB E6				jmp FindLoop
+ 000005AC				NotNewlineFind:
+ 000005AC  47					inc edi			; Increment edi to show a character was read
+ 000005AD  EB E6				jmp FindLoop
 
- 0000053D				FoundPhrase:
+ 000005AF				FoundPhrase:
 						; Save the start of the phrase
- 0000053D  89 3D 00002BA6 R			mov phraseStart, edi
+ 000005AF  89 3D 00002BDA R			mov phraseStart, edi
 
 						; Find the end of the phrase
- 00000543					FindEnd:
- 00000543  3B 3D 00002BA2 R				cmp edi, phrasesbytesRead	; Check if we've reached the end of the buffer
- 00000549  74 0D					je FinishFind ; Jump to finish if done
+ 000005B5					FindEnd:
+ 000005B5  3B 3D 00002BD6 R				cmp edi, phrasesbytesRead	; Check if we've reached the end of the buffer
+ 000005BB  74 0D					je FinishFind ; Jump to finish if done
 
- 0000054B  8A 87 00001816 R				mov al, byte ptr [phrasesbuffer + edi] ; Move the current character to al
- 00000551  47						inc edi ; Move to the next character
- 00000552  3C 0A					cmp al, 0ah ; New line
- 00000554  74 02					je FinishFind
+ 000005BD  8A 87 0000184A R				mov al, byte ptr [phrasesbuffer + edi] ; Move the current character to al
+ 000005C3  47						inc edi ; Move to the next character
+ 000005C4  3C 0A					cmp al, 0ah ; New line
+ 000005C6  74 02					je FinishFind
 
- 00000556  EB EB					jmp FindEnd
+ 000005C8  EB EB					jmp FindEnd
 
- 00000558						FinishFind:
+ 000005CA						FinishFind:
 							; Save the end of the phrase
- 00000558  4F						dec edi ; Move back one to get the last character of the phrase
- 00000559  89 3D 00002BAA R				mov phraseEnd, edi ; Save the end
+ 000005CA  4F						dec edi ; Move back one to get the last character of the phrase
+ 000005CB  89 3D 00002BDE R				mov phraseEnd, edi ; Save the end
 
- 0000055F				EndFind:
- 0000055F  C3				ret
+ 000005D1				EndFind:
+ 000005D1  C3				ret
 
- 00000560			GetRandomPhrase ENDP
+ 000005D2			GetRandomPhrase ENDP
 
- 00000560			PrintRandomPhrase PROC
- 00000560  E8 FFFFFFA8			call GetRandomPhrase
+ 000005D2			PrintRandomPhrase PROC
+ 000005D2  E8 FFFFFFA8			call GetRandomPhrase
 
- 00000565  8B 3D 00002BA6 R		mov edi, phraseStart
- 0000056B  8B 0D 00002BAA R		mov ecx, phraseEnd
+ 000005D7  8B 3D 00002BDA R		mov edi, phraseStart
+ 000005DD  8B 0D 00002BDE R		mov ecx, phraseEnd
 
- 00000571				PrintLoop:
- 00000571  3B F9			    cmp edi, ecx	; Check if we've reached the end of the phrase
- 00000573  74 0E				je EndPrint		; Jump to end if done
+ 000005E3				PrintLoop:
+ 000005E3  3B F9			    cmp edi, ecx	; Check if we've reached the end of the phrase
+ 000005E5  74 0E				je EndPrint		; Jump to end if done
 
- 00000575  8A 87 00001816 R			mov al, byte ptr [phrasesbuffer + edi]	; Move the current character to al
- 0000057B  E8 00000000 E			call WriteChar							; Write the character to the screen
+ 000005E7  8A 87 0000184A R			mov al, byte ptr [phrasesbuffer + edi]	; Move the current character to al
+ 000005ED  E8 00000000 E			call WriteChar							; Write the character to the screen
 
- 00000580  47					inc edi			; Move to the next character
- 00000581  EB EE				jmp PrintLoop	; Continue loop
+ 000005F2  47					inc edi			; Move to the next character
+ 000005F3  EB EE				jmp PrintLoop	; Continue loop
 
- 00000583				EndPrint:
- 00000583  C3				ret
+ 000005F5				EndPrint:
+ 000005F5  C3				ret
 
- 00000584			PrintRandomPhrase ENDP
+ 000005F6			PrintRandomPhrase ENDP
 
- 00000584			GenerateMathEquation PROC
+ 000005F6			GenerateMathEquation PROC
 					; Clear the equation buffer
- 00000584  BF 00002C87 R		mov edi, OFFSET equationBuffer	; Move the offset of the equation buffer into edi
- 00000589  B9 00001388			mov ecx, SIZEOF equationBuffer	; Move the size of the equation buffer into ecx
- 0000058E  B0 00			mov al, 0	; Move 0 into al
- 00000590  F3/ AA			rep stosb	; Fill the buffer with 0
+ 000005F6  BF 00002CBB R		mov edi, OFFSET equationBuffer	; Move the offset of the equation buffer into edi
+ 000005FB  B9 00001388			mov ecx, SIZEOF equationBuffer	; Move the size of the equation buffer into ecx
+ 00000600  B0 00			mov al, 0	; Move 0 into al
+ 00000602  F3/ AA			rep stosb	; Fill the buffer with 0
 
 					; Generate first term
- 00000592  E8 00000000 E		call Randomize
- 00000597  B8 00000009			mov eax, 9					; 9 is the maximum value for a term
- 0000059C  E8 00000000 E		call RandomRange
- 000005A1  40				inc eax						; Increment eax to get a number between 1 and 9
+ 00000604  E8 00000000 E		call Randomize
+ 00000609  B8 00000009			mov eax, 9					; 9 is the maximum value for a term
+ 0000060E  E8 00000000 E		call RandomRange
+ 00000613  40				inc eax						; Increment eax to get a number between 1 and 9
 
 					; Store term into buffer
- 000005A2  A2 00002C86 R		mov term, al				; Store the random number into term
- 000005A7  A0 00002C86 R		mov al, term				; Move the term number into al
- 000005AC  04 30			add al, 48					; Convert the number to ASCII
- 000005AE  88 07			mov [edi], al				; Move the first term into buffer
- 000005B0  47				inc edi						; Move to the next position in the equation buffer
+ 00000614  A2 00002CBA R		mov term, al				; Store the random number into term
+ 00000619  A0 00002CBA R		mov al, term				; Move the term number into al
+ 0000061E  04 30			add al, 48					; Convert the number to ASCII
+ 00000620  88 07			mov [edi], al				; Move the first term into buffer
+ 00000622  47				inc edi						; Move to the next position in the equation buffer
 
- 000005B1  FE C1			inc cl						; Increment the counter
+ 00000623  FE C1			inc cl						; Increment the counter
 
 					; Prepare counter
- 000005B3  B1 01			mov cl, 1
+ 00000625  B1 01			mov cl, 1
 
 					; Generate the terms
- 000005B5				GenerateTerms:
+ 00000627				GenerateTerms:
 						; Call small delay for time slicing
- 000005B5  B8 0000000A				mov eax, 10
- 000005BA  E8 00000000 E			call Delay
+ 00000627  B8 0000000A				mov eax, 10
+ 0000062C  E8 00000000 E			call Delay
 						; Generate a term
- 000005BF  E8 00000000 E			call Randomize
- 000005C4  B8 00000009				mov eax, 9		; 9 is the maximum value for a term
- 000005C9  E8 00000000 E			call RandomRange
- 000005CE  40					inc eax			; Increment eax to get a number between 1 and 9
- 000005CF  A2 00002C86 R			mov term, al	; Move the term number into term
+ 00000631  E8 00000000 E			call Randomize
+ 00000636  B8 00000009				mov eax, 9		; 9 is the maximum value for a term
+ 0000063B  E8 00000000 E			call RandomRange
+ 00000640  40					inc eax			; Increment eax to get a number between 1 and 9
+ 00000641  A2 00002CBA R			mov term, al	; Move the term number into term
 
 
- 000005D4  E8 00000000 E			call Randomize
- 000005D9  B8 00000003				mov eax, 3			; 3 is the maximum number of operators
- 000005DE  E8 00000000 E			call RandomRange	; Generate a random operator number between 1 and 3 in eax
- 000005E3  40					inc eax				; Increment eax to get a number between 1 and 3
- 000005E4  A2 00002C85 R			mov operator, al	; Move the operator number into variable
+ 00000646  E8 00000000 E			call Randomize
+ 0000064B  B8 00000003				mov eax, 3			; 3 is the maximum number of operators
+ 00000650  E8 00000000 E			call RandomRange	; Generate a random operator number between 1 and 3 in eax
+ 00000655  40					inc eax				; Increment eax to get a number between 1 and 3
+ 00000656  A2 00002CB9 R			mov operator, al	; Move the operator number into variable
 					
 
 						; Add the operator to the equation buffer
 						.IF operator == 1
- 000005F2  C6 07 20					mov BYTE PTR [edi], ' '
- 000005F5  C6 47 01 2B					mov BYTE PTR [edi+1], '+'
- 000005F9  C6 47 02 20					mov BYTE PTR [edi+2], ' '
+ 00000664  C6 07 20					mov BYTE PTR [edi], ' '
+ 00000667  C6 47 01 2B					mov BYTE PTR [edi+1], '+'
+ 0000066B  C6 47 02 20					mov BYTE PTR [edi+2], ' '
 						.ELSEIF operator == 2
- 00000608  C6 07 20					mov BYTE PTR [edi], ' '
- 0000060B  C6 47 01 2D					mov BYTE PTR [edi+1], '-'
- 0000060F  C6 47 02 20					mov BYTE PTR [edi+2], ' '
+ 0000067A  C6 07 20					mov BYTE PTR [edi], ' '
+ 0000067D  C6 47 01 2D					mov BYTE PTR [edi+1], '-'
+ 00000681  C6 47 02 20					mov BYTE PTR [edi+2], ' '
 						.ELSEIF operator == 3
- 0000061E  C6 07 20					mov BYTE PTR [edi], ' '
- 00000621  C6 47 01 2A					mov BYTE PTR [edi+1], '*'
- 00000625  C6 47 02 20					mov BYTE PTR [edi+2], ' '
+ 00000690  C6 07 20					mov BYTE PTR [edi], ' '
+ 00000693  C6 47 01 2A					mov BYTE PTR [edi+1], '*'
+ 00000697  C6 47 02 20					mov BYTE PTR [edi+2], ' '
 						.ENDIF
 
 						; Add the term to the equation buffer
- 00000629  83 C7 03				add edi, 3					; Move to the end of the equation buffer
- 0000062C  A0 00002C86 R			mov al, term 				; Move the term into al
- 00000631  04 30				add al, 48 					; Convert the number to ASCII
- 00000633  88 07				mov [edi], al				; Move the term into the equation buffer
- 00000635  47					inc edi						; Move to the next position in the equation buffer
+ 0000069B  83 C7 03				add edi, 3					; Move to the end of the equation buffer
+ 0000069E  A0 00002CBA R			mov al, term 				; Move the term into al
+ 000006A3  04 30				add al, 48 					; Convert the number to ASCII
+ 000006A5  88 07				mov [edi], al				; Move the term into the equation buffer
+ 000006A7  47					inc edi						; Move to the next position in the equation buffer
 
 						; Increment the counter and check if we've reached the number of terms
- 00000636  FE C1				inc cl
- 00000638  3A 0D 00002C84 R			cmp cl, terms
- 0000063E  0F 8C FFFFFF71			jl GenerateTerms
+ 000006A8  FE C1				inc cl
+ 000006AA  3A 0D 00002CB8 R			cmp cl, terms
+ 000006B0  0F 8C FFFFFF71			jl GenerateTerms
 
 						; Add the equals sign to the equation buffer
- 00000644  C6 07 20				mov BYTE PTR [edi], ' '
- 00000647  C6 47 01 3D				mov BYTE PTR [edi+1], '='
- 0000064B  C6 47 02 20				mov BYTE PTR [edi+2], ' '
- 0000064F  C6 47 03 3F		        mov BYTE PTR [edi+3], '?'
- 00000653  83 C7 04				add edi, 4
+ 000006B6  C6 07 20				mov BYTE PTR [edi], ' '
+ 000006B9  C6 47 01 3D				mov BYTE PTR [edi+1], '='
+ 000006BD  C6 47 02 20				mov BYTE PTR [edi+2], ' '
+ 000006C1  C6 47 03 3F		        mov BYTE PTR [edi+3], '?'
+ 000006C5  83 C7 04				add edi, 4
 
 						; Print the equation
- 00000656  B9 00002C87 R			mov ecx, OFFSET equationBuffer
+ 000006C8  B9 00002CBB R			mov ecx, OFFSET equationBuffer
 						
- 0000065B					PrintLoop:
- 0000065B  3B F9				cmp edi, ecx	; Check if we've reached the end of the equation
- 0000065D  74 0A				je EndPrint		; Jump to end if done
+ 000006CD					PrintLoop:
+ 000006CD  3B F9				cmp edi, ecx	; Check if we've reached the end of the equation
+ 000006CF  74 0A				je EndPrint		; Jump to end if done
 
- 0000065F  8A 01				mov al, byte ptr [ecx]	; Move the current character to al
- 00000661  E8 00000000 E			call WriteChar							; Write the character to the screen
+ 000006D1  8A 01				mov al, byte ptr [ecx]	; Move the current character to al
+ 000006D3  E8 00000000 E			call WriteChar							; Write the character to the screen
 						
- 00000666  41					inc ecx
- 00000667  EB F2				jmp PrintLoop
+ 000006D8  41					inc ecx
+ 000006D9  EB F2				jmp PrintLoop
 
- 00000669					EndPrint:
- 00000669  E8 00000001				call EvaluateExpression
- 0000066E  C3				ret
+ 000006DB					EndPrint:
+ 000006DB  E8 00000001				call EvaluateExpression
+ 000006E0  C3				ret
 
- 0000066F			GenerateMathEquation ENDP
+ 000006E1			GenerateMathEquation ENDP
 
- 0000066F			EvaluateExpression PROC
- 0000066F  50			push eax
+ 000006E1			EvaluateExpression PROC
+ 000006E1  50			push eax
 
-				;lea edi, equationBuffer
- 00000670  BB 00002BBB R	mov ebx, OFFSET termArr
- 00000675  B9 00002C1F R	mov ecx, OFFSET operators
+				;move edi to the start of the equation 
+ 000006E2  0F B6 05		movzx eax, difficultyLevel
+	   00002BED R
+ 000006E9  6B C0 04		imul eax, 4
+ 000006EC  40			inc eax
+ 000006ED  2B F8		sub edi, eax
+
+ 000006EF  BB 00002BEF R	mov ebx, OFFSET termArr
+ 000006F4  B9 00002C53 R	mov ecx, OFFSET operators
 
 				; Turn equation buffer into two arrays
- 0000067A			TransformLoop:
- 0000067A  8A 07			mov al, [edi]		; Load current term into al
- 0000067C  A2 00002BBA R		mov currentTerm, al			; Move al into currentTerm
+ 000006F9			TransformLoop:
+
+ 000006F9  8A 07			mov al, BYTE PTR [edi]		; Load current term into al
+ 000006FB  A2 00002BEE R		mov currentTerm, al			; Move al into currentTerm
 
 					.IF currentTerm > '0' && currentTerm <= '9'	; currentToken is a number
- 00000693  A0 00002BBA R			mov al, currentTerm
- 00000698  88 03				mov BYTE PTR [ebx], al		; save currentToken to terms
- 0000069A  80 2B 30				sub BYTE PTR [ebx], '0'				; convert to raw value
- 0000069D  43					inc ebx						; increment ebx for next term
- 0000069E  47					inc edi						; increment edi to point at next buffer pos
- 0000069F  EB D9				jmp TransformLoop
+ 00000712  A0 00002BEE R			mov al, currentTerm
+ 00000717  88 03				mov BYTE PTR [ebx], al		; save currentToken to terms
+ 00000719  80 2B 30				sub BYTE PTR [ebx], 48				; convert to raw value
+ 0000071C  43					inc ebx						; increment ebx for next term
+ 0000071D  47					inc edi						; increment edi to point at next bufs
+ 0000071E  EB D9				jmp TransformLoop
 					.ELSEIF currentTerm == '+' || currentTerm == '-' || currentTerm == '*'	; currentToken is a valid operator
- 000006BE  A0 00002BBA R			mov al, currentTerm
- 000006C3  88 01				mov BYTE PTR [ecx], al				; save currentToken to operators
- 000006C5  41					inc ecx								; increment ecx for next operator
- 000006C6  47					inc edi								; increment edi for next buffer pos
- 000006C7  EB B1				jmp TransformLoop
+ 0000073D  A0 00002BEE R			mov al, currentTerm
+ 00000742  88 01				mov BYTE PTR [ecx], al				; save currentToken to operators
+ 00000744  41					inc ecx								; increment ecx for next operator
+ 00000745  47					inc edi								; increment edi for next buffer pos
+ 00000746  EB B1				jmp TransformLoop
 					.ELSEIF currentTerm == ' '						; currentToken is a filler space
- 000006D4  47					inc edi				; Move to next position in buffer
- 000006D5  EB A3				jmp TransformLoop	; Start next loop
+ 00000753  47					inc edi				; Move to next position in buffer
+ 00000754  EB A3				jmp TransformLoop	; Start next loop
 					.ELSE											; currentToken is anything else (i.e. '=')
- 000006D9  C6 03 FF			mov BYTE PTR [ebx], 0FFh		; Values to signal when end of useful data has been reached
- 000006DC  C6 01 FF			mov BYTE PTR [ecx], 0FFh
+ 00000758  C6 03 FF			mov BYTE PTR [ebx], 0FFh		; Values to signal when end of useful data has been reached
+ 0000075B  C6 01 FF			mov BYTE PTR [ecx], 0FFh
 					.ENDIF
 
 
- 000006DF  C6 05 00002C83 R	mov equationAnswer, 0		; Clear equation answer
+ 0000075E  C6 05 00002CB7 R	mov equationAnswer, 0		; Clear equation answer
 	   00
+ 00000765  BB 00002BEF R	mov ebx, OFFSET termArr
+ 0000076A  B9 00002C53 R	mov ecx, OFFSET operators		; reset ebx and ecx to point to the arrays
 
 
 				; First loop to evaluate the answer, performs all multiplication
- 000006E6			EvalLoop1:
- 000006E6  BB 00002BBB R		mov ebx, OFFSET termArr
- 000006EB  B9 00002C1F R		mov ecx, OFFSET operators		; reset ebx and ecx to point to the arrays
+ 0000076F			EvalLoop1:
 
 					;mov currentTerm, BYTE PTR [ecx]		; Load operator array into currentTerm, we will be searching mainly for operators
 					MoveByteToVar currentTerm, ecx
- 000006F0  0F B6 01	     1	    movzx eax, BYTE PTR [ecx]   ; Move byte at src to EAX with zero-extension
- 000006F3  A2 00002BBA R     1	    mov [currentTerm], al				; Move the content of EAX to var
+ 0000076F  0F B6 01	     1	    movzx eax, BYTE PTR [ecx]   ; Move byte at src to EAX with zero-extension
+ 00000772  A2 00002BEE R     1	    mov [currentTerm], al				; Move the content of EAX to var
 
 
-					; When multiplication is found at index n, it's corresponding numbers are located at 2n and 2n-1 in the terms array.
+					; When multiplication is found at index n, it's corresponding numbers are located at n and n+1 in the terms array.
 
 					.IF currentTerm == '*'
- 00000701  8B D1				mov edx, ecx					; save ecx (current term) into edx
- 00000703  81 EA 00002C1F R			sub edx, OFFSET operators		; sub original ecx from current to get distance from start
- 00000709  03 D2				add edx, edx					; double distance to get proper offset for terms
- 0000070B  0F B6 04 13				movzx eax, BYTE PTR [ebx+edx]
- 0000070F  F6 6C 13 FF				imul BYTE PTR [ebx+edx-1]		; multiply terms corresponding to operator and save in first operator position
- 00000713  C6 04 13 00				mov BYTE PTR [ebx+edx], 0			; clear the term where the multiplier used to be
- 00000717  41					inc ecx							; increment ecx for next operator
-					.ELSEIF currentTerm == 0FFh	; if current term is data-end signal, finish loop
- 00000723  EB 07				jmp EvalLoop2
+ 00000780  8B D1				mov edx, ecx					; save ecx (current term) into edx
+ 00000782  81 EA 00002C53 R			sub edx, OFFSET operators		; sub original ecx from current to get distance from start
+ 00000788  0F B6 44 13 01			movzx eax, BYTE PTR [ebx+edx+1]
+ 0000078D  F6 2C 13				imul BYTE PTR [ebx+edx]			; multiply terms corresponding to operator and save in first operator position
+ 00000790  88 04 13				mov BYTE PTR [ebx+edx], al		; save result in first operator position
+
+						; Set up for loop to shift all subsequent bytes left by one
+ 00000793					BufferShift:
+ 00000793  8A 44 13 02					mov al, BYTE PTR [ebx+edx+2]	; Load term byte at source position
+ 00000797  88 44 13 01					mov BYTE PTR [ebx+edx+1], al		; Store it into destination position
+
+ 0000079B  8A 44 11 01					mov al, BYTE PTR [ecx+edx+1]		; Load operator byte at source position
+ 0000079F  88 04 11					mov BYTE PTR [ecx+edx], al	; Store it into destination position
+
+ 000007A2  42						inc edx							; Move to next source position
+
+ 000007A3  8A 44 11 FF					mov al, BYTE PTR [ecx+edx-1]		; Load term byte at source position
+
+ 000007A7  3C 00					cmp al, 0
+ 000007A9  74 23					je EvalLoop1End
+
+ 000007AB  3C FF					cmp al, 0FFh	; Check if we've reached the end of the array
+ 000007AD  75 E4					jne BufferShift
+ 000007AF  C6 44 13 01 00			mov BYTE PTR [ebx+edx+1], 0	; Clear the last byte
+ 000007B4  C6 04 11 00				mov BYTE PTR [ecx+edx], 0	; Clear the last byte
+
+						;inc ecx							; increment ecx for next operator
+ 000007B8  EB B5				jmp EvalLoop1
+					.ELSEIF currentTerm == 0FFh; if current term is data-end signal, finish loop
+ 000007C5  EB 07				jmp EvalLoop1End
 					.ELSE	; if not multiplication, continue loop
- 00000727  41					inc ecx
- 00000728  EB BC				jmp EvalLoop1
+ 000007C9  41					inc ecx
+ 000007CA  EB A3				jmp EvalLoop1
 					.ENDIF
 
- 0000072A  EB BA		jmp EvalLoop1
+ 000007CC  EB A1		jmp EvalLoop1
+ 000007CE			EvalLoop1End:
+ 000007CE  BB 00002BEF R		mov ebx, OFFSET termArr
+ 000007D3  B9 00002C53 R		mov ecx, OFFSET operators
 
 				; Second loop to do all addition and subtraction
- 0000072C			EvalLoop2:
- 0000072C  BB 00002BBB R		mov ebx, OFFSET termArr
- 00000731  B9 00002C1F R		mov ecx, OFFSET operators
+ 000007D8			EvalLoop2:
 					MoveByteToVar currentTerm, ecx
- 00000736  0F B6 01	     1	    movzx eax, BYTE PTR [ecx]   ; Move byte at src to EAX with zero-extension
- 00000739  A2 00002BBA R     1	    mov [currentTerm], al				; Move the content of EAX to var
+ 000007D8  0F B6 01	     1	    movzx eax, BYTE PTR [ecx]   ; Move byte at src to EAX with zero-extension
+ 000007DB  A2 00002BEE R     1	    mov [currentTerm], al				; Move the content of EAX to var
 
 					MoveByteToVar equationAnswer, ebx	; Move first term into equation answer
- 0000073E  0F B6 03	     1	    movzx eax, BYTE PTR [ebx]   ; Move byte at src to EAX with zero-extension
- 00000741  A2 00002C83 R     1	    mov [equationAnswer], al				; Move the content of EAX to var
- 00000746  43				inc ebx								; Increment ebx to consider next operator
+ 000007E0  0F B6 03	     1	    movzx eax, BYTE PTR [ebx]   ; Move byte at src to EAX with zero-extension
+ 000007E3  A2 00002CB7 R     1	    mov [equationAnswer], al				; Move the content of EAX to var
+ 000007E8  43				inc ebx								; Increment ebx to consider next operator
 
-					.WHILE currentTerm != 0FFh
- 00000749					LoopStart:
+ 000007E9				LoopStart:
+					.WHILE BYTE PTR [ecx] != 0FFh
 						; Loop through terms to find next non-zero number
- 00000749  8A 03				mov al, BYTE PTR [ebx]	; Load current term into al
+ 000007EB  8A 01				mov al, BYTE PTR [ecx]	; Load current operator into al
+ 000007ED  8A 23				mov ah, BYTE PTR [ebx]	; Load current term into ah
 
-						.IF al != 0						; If term isn't zero, go ahead and check for next term
- 0000074F					OpCheck:
-							.IF BYTE PTR [ecx] == '+' ; If next operator is addition
- 00000754  00 05 00002C83 R					add equationAnswer, al	; Add next term, move to next one
- 0000075A  41							inc ecx					; Increment ecx to consider next operator
-							.ELSEIF BYTE PTR [ecx] == '-' ; If next operator is substraction
- 00000762  28 05 00002C83 R					sub equationAnswer, al	; Subtract next term, move to next one
- 00000768  41							inc ecx					; Increment ecx to consider next operator
+						.IF ah != 0						; If term isn't zero, go ahead and check for next 
+							.IF al == '+' ; If next operator is addition
+ 000007F7  00 25 00002CB7 R					add equationAnswer, ah	; Add next term, move to next one
+ 000007FD  43							inc ebx
+ 000007FE  41							inc ecx					; Increment ecx to consider next operator
+							.ELSEIF al == '-' ; If next operator is substraction
+ 00000805  28 25 00002CB7 R					sub equationAnswer, ah	; Subtract next term, move to next one
+ 0000080B  43							inc ebx
+ 0000080C  41							inc ecx					; Increment ecx to consider next operator
+							.ELSEIF al == 0FFh	; If end of data has been reached, end loop
+ 00000813  EB 0B						jmp EvalLoopFinish
 							.ELSE						; In case of any other character, increment to next operator and check again
- 0000076B  41							inc ecx					; Increment ecx to consider next operator
- 0000076C  EB E1						jmp OpCheck				; Jump back to check next operator
-							
+ 00000817  41							inc ecx					; Increment ecx to consider next operator			
 							.ENDIF
-						.ENDIF							; If term is zero, it was erased, increment to next term but not operator
- 0000076E  43						inc ebx						; Increment ebx to consider next term
- 0000076F  EB D8					jmp LoopStart
-						
-					.ENDW
-
-					.IF currentTerm == '+'		; If operator is addition
- 00000783  8A 03				mov al, BYTE PTR [ebx]
- 00000785  00 05 00002C83 R			add equationAnswer, al	; Add next term, move to next one
- 0000078B  43					inc ebx
- 0000078C  41					inc ecx
-					.ELSEIF currentTerm == '-'	; If operator is substraction
- 00000798  8A 03				mov al, BYTE PTR [ebx]
- 0000079A  28 05 00002C83 R			sub equationAnswer, al	; Subtract next term, move to next one
- 000007A0  43					inc ebx
- 000007A1  41					inc ecx
-					.ELSEIF currentTerm == 0FFh	; If end of data has been reached, end loop
- 000007AD  EB 08				jmp EvalLoopFinish
-					.ELSE						; In case of any other character, ignore and move forward
- 000007B1  41					inc ecx
-					.ENDIF
-
- 000007B2  E9 FFFFFF75			jmp EvalLoop2
-
- 000007B7				EvalLoopFinish:
+						.ELSE
+ 0000081A  41						inc ecx						; If term is zero, it was erased, increment to next term but not operator
+						.ENDIF									
+						.ENDW
+ 00000820				EvalLoopFinish:
 					
- 000007B7  58				pop eax
- 000007B8  C3				ret
- 000007B9			EvaluateExpression ENDP
+ 00000820  58				pop eax
+ 00000821  C3				ret
+ 00000822			EvaluateExpression ENDP
 
 				END main
-Microsoft (R) Macro Assembler Version 14.39.33523.0	    04/21/24 13:42:47
+Microsoft (R) Macro Assembler Version 14.39.33523.0	    04/22/24 10:58:55
 runner.asm						     Symbols 2 - 1
 
 
@@ -1272,6 +1342,7 @@ Macros:
 GetBufferPos . . . . . . . . . .	Proc
 IsDefined  . . . . . . . . . . .	Func
 MoveByteToVar  . . . . . . . . .	Proc
+RemoveBufferElement  . . . . . .	Proc
 Startup  . . . . . . . . . . . .	Proc
 mDumpMem . . . . . . . . . . . .	Proc
 mDump  . . . . . . . . . . . . .	Proc
@@ -1373,8 +1444,8 @@ Segments and Groups:
 
 FLAT . . . . . . . . . . . . . .	GROUP
 STACK  . . . . . . . . . . . . .	32 Bit	 00001000 Para	  Stack	  'STACK'	 
-_DATA  . . . . . . . . . . . . .	32 Bit	 0000400F Para	  Public  'DATA'	
-_TEXT  . . . . . . . . . . . . .	32 Bit	 000007B9 Para	  Public  'CODE'	
+_DATA  . . . . . . . . . . . . .	32 Bit	 00004043 Para	  Public  'DATA'	
+_TEXT  . . . . . . . . . . . . .	32 Bit	 00000822 Para	  Public  'CODE'	
 
 
 Procedures, parameters, and locals:
@@ -1384,41 +1455,42 @@ Procedures, parameters, and locals:
 CloseFile  . . . . . . . . . . .	P Near	 00000000 FLAT	Length= 00000000 External STDCALL
 CloseHandle  . . . . . . . . . .	P Near	 00000000 FLAT	Length= 00000000 External STDCALL
 Clrscr . . . . . . . . . . . . .	P Near	 00000000 FLAT	Length= 00000000 External STDCALL
-CountStars . . . . . . . . . . .	P Near	 00000403 _TEXT	Length= 00000028 Public STDCALL
-  CountLoop  . . . . . . . . . .	L Near	 00000410 _TEXT	
-  CountStar  . . . . . . . . . .	L Near	 00000421 _TEXT	
-  EndCount . . . . . . . . . . .	L Near	 0000042A _TEXT	
+CountStars . . . . . . . . . . .	P Near	 00000475 _TEXT	Length= 00000028 Public STDCALL
+  CountLoop  . . . . . . . . . .	L Near	 00000482 _TEXT	
+  CountStar  . . . . . . . . . .	L Near	 00000493 _TEXT	
+  EndCount . . . . . . . . . . .	L Near	 0000049C _TEXT	
 CreateFileA  . . . . . . . . . .	P Near	 00000000 FLAT	Length= 00000000 External STDCALL
 CreateOutputFile . . . . . . . .	P Near	 00000000 FLAT	Length= 00000000 External STDCALL
 Crlf . . . . . . . . . . . . . .	P Near	 00000000 FLAT	Length= 00000000 External STDCALL
 Delay  . . . . . . . . . . . . .	P Near	 00000000 FLAT	Length= 00000000 External STDCALL
 DisplayOutro . . . . . . . . . .	P Near	 00000054 _TEXT	Length= 0000001B Public STDCALL
   WaitLoop . . . . . . . . . . .	L Near	 00000067 _TEXT	
-DrawInfo . . . . . . . . . . . .	P Near	 0000046C _TEXT	Length= 0000006E Public STDCALL
-DrawWorld  . . . . . . . . . . .	P Near	 0000042B _TEXT	Length= 00000041 Public STDCALL
-  DrawLoop . . . . . . . . . . .	L Near	 00000438 _TEXT	
-  WriteYellow  . . . . . . . . .	L Near	 00000448 _TEXT	
-  NormalWrite  . . . . . . . . .	L Near	 00000463 _TEXT	
-  PostWrite  . . . . . . . . . .	L Near	 00000468 _TEXT	
-  EndDraw  . . . . . . . . . . .	L Near	 0000046B _TEXT	
+DrawInfo . . . . . . . . . . . .	P Near	 000004DE _TEXT	Length= 0000006E Public STDCALL
+DrawWorld  . . . . . . . . . . .	P Near	 0000049D _TEXT	Length= 00000041 Public STDCALL
+  DrawLoop . . . . . . . . . . .	L Near	 000004AA _TEXT	
+  WriteYellow  . . . . . . . . .	L Near	 000004BA _TEXT	
+  NormalWrite  . . . . . . . . .	L Near	 000004D5 _TEXT	
+  PostWrite  . . . . . . . . . .	L Near	 000004DA _TEXT	
+  EndDraw  . . . . . . . . . . .	L Near	 000004DD _TEXT	
 DumpMem  . . . . . . . . . . . .	P Near	 00000000 FLAT	Length= 00000000 External STDCALL
 DumpRegs . . . . . . . . . . . .	P Near	 00000000 FLAT	Length= 00000000 External STDCALL
-EvaluateExpression . . . . . . .	P Near	 0000066F _TEXT	Length= 0000014A Public STDCALL
-  TransformLoop  . . . . . . . .	L Near	 0000067A _TEXT	
-  EvalLoop1  . . . . . . . . . .	L Near	 000006E6 _TEXT	
-  EvalLoop2  . . . . . . . . . .	L Near	 0000072C _TEXT	
-  LoopStart  . . . . . . . . . .	L Near	 00000749 _TEXT	
-  OpCheck  . . . . . . . . . . .	L Near	 0000074F _TEXT	
-  EvalLoopFinish . . . . . . . .	L Near	 000007B7 _TEXT	
+EvaluateExpression . . . . . . .	P Near	 000006E1 _TEXT	Length= 00000141 Public STDCALL
+  TransformLoop  . . . . . . . .	L Near	 000006F9 _TEXT	
+  EvalLoop1  . . . . . . . . . .	L Near	 0000076F _TEXT	
+  BufferShift  . . . . . . . . .	L Near	 00000793 _TEXT	
+  EvalLoop1End . . . . . . . . .	L Near	 000007CE _TEXT	
+  EvalLoop2  . . . . . . . . . .	L Near	 000007D8 _TEXT	
+  LoopStart  . . . . . . . . . .	L Near	 000007E9 _TEXT	
+  EvalLoopFinish . . . . . . . .	L Near	 00000820 _TEXT	
 ExitProcess  . . . . . . . . . .	P Near	 00000000 FLAT	Length= 00000000 External STDCALL
 FileTimeToDosDateTime  . . . . .	P Near	 00000000 FLAT	Length= 00000000 External STDCALL
 FileTimeToSystemTime . . . . . .	P Near	 00000000 FLAT	Length= 00000000 External STDCALL
 FlushConsoleInputBuffer  . . . .	P Near	 00000000 FLAT	Length= 00000000 External STDCALL
 FormatMessageA . . . . . . . . .	P Near	 00000000 FLAT	Length= 00000000 External STDCALL
-GenerateMathEquation . . . . . .	P Near	 00000584 _TEXT	Length= 000000EB Public STDCALL
-  GenerateTerms  . . . . . . . .	L Near	 000005B5 _TEXT	
-  PrintLoop  . . . . . . . . . .	L Near	 0000065B _TEXT	
-  EndPrint . . . . . . . . . . .	L Near	 00000669 _TEXT	
+GenerateMathEquation . . . . . .	P Near	 000005F6 _TEXT	Length= 000000EB Public STDCALL
+  GenerateTerms  . . . . . . . .	L Near	 00000627 _TEXT	
+  PrintLoop  . . . . . . . . . .	L Near	 000006CD _TEXT	
+  EndPrint . . . . . . . . . . .	L Near	 000006DB _TEXT	
 GetCommandLineA  . . . . . . . .	P Near	 00000000 FLAT	Length= 00000000 External STDCALL
 GetCommandTail . . . . . . . . .	P Near	 00000000 FLAT	Length= 00000000 External STDCALL
 GetConsoleCP . . . . . . . . . .	P Near	 00000000 FLAT	Length= 00000000 External STDCALL
@@ -1434,13 +1506,13 @@ GetMaxXY . . . . . . . . . . . .	P Near	 00000000 FLAT	Length= 00000000 External
 GetMseconds  . . . . . . . . . .	P Near	 00000000 FLAT	Length= 00000000 External STDCALL
 GetNumberOfConsoleInputEvents  .	P Near	 00000000 FLAT	Length= 00000000 External STDCALL
 GetProcessHeap . . . . . . . . .	P Near	 00000000 FLAT	Length= 00000000 External STDCALL
-GetRandomPhrase  . . . . . . . .	P Near	 0000050D _TEXT	Length= 00000053 Public STDCALL
-  FindLoop . . . . . . . . . . .	L Near	 00000523 _TEXT	
-  NotNewlineFind . . . . . . . .	L Near	 0000053A _TEXT	
-  FoundPhrase  . . . . . . . . .	L Near	 0000053D _TEXT	
-  FindEnd  . . . . . . . . . . .	L Near	 00000543 _TEXT	
-  FinishFind . . . . . . . . . .	L Near	 00000558 _TEXT	
-  EndFind  . . . . . . . . . . .	L Near	 0000055F _TEXT	
+GetRandomPhrase  . . . . . . . .	P Near	 0000057F _TEXT	Length= 00000053 Public STDCALL
+  FindLoop . . . . . . . . . . .	L Near	 00000595 _TEXT	
+  NotNewlineFind . . . . . . . .	L Near	 000005AC _TEXT	
+  FoundPhrase  . . . . . . . . .	L Near	 000005AF _TEXT	
+  FindEnd  . . . . . . . . . . .	L Near	 000005B5 _TEXT	
+  FinishFind . . . . . . . . . .	L Near	 000005CA _TEXT	
+  EndFind  . . . . . . . . . . .	L Near	 000005D1 _TEXT	
 GetStdHandle . . . . . . . . . .	P Near	 00000000 FLAT	Length= 00000000 External STDCALL
 GetSystemTime  . . . . . . . . .	P Near	 00000000 FLAT	Length= 00000000 External STDCALL
 GetTextColor . . . . . . . . . .	P Near	 00000000 FLAT	Length= 00000000 External STDCALL
@@ -1453,39 +1525,39 @@ HeapFree . . . . . . . . . . . .	P Near	 00000000 FLAT	Length= 00000000 External
 HeapSize . . . . . . . . . . . .	P Near	 00000000 FLAT	Length= 00000000 External STDCALL
 HideCursor . . . . . . . . . . .	P Near	 0000008E _TEXT	Length= 00000021 Public STDCALL
   hConsole . . . . . . . . . . .	DWord	 bp - 00000004
-InitDotPosition  . . . . . . . .	P Near	 000000C6 _TEXT	Length= 0000001E Public STDCALL
-IntroScreen  . . . . . . . . . .	P Near	 000000AF _TEXT	Length= 00000017 Public STDCALL
-  WaitLoop . . . . . . . . . . .	L Near	 000000BE _TEXT	
+InitDotPosition  . . . . . . . .	P Near	 00000138 _TEXT	Length= 0000001E Public STDCALL
+IntroScreen  . . . . . . . . . .	P Near	 000000AF _TEXT	Length= 00000089 Public STDCALL
+  WaitLoop . . . . . . . . . . .	L Near	 00000130 _TEXT	
 IsDigit  . . . . . . . . . . . .	P Near	 00000000 FLAT	Length= 00000000 External STDCALL
 LocalFree  . . . . . . . . . . .	P Near	 00000000 FLAT	Length= 00000000 External STDCALL
 MessageBoxA  . . . . . . . . . .	P Near	 00000000 FLAT	Length= 00000000 External STDCALL
-MoveDot  . . . . . . . . . . . .	P Near	 000000E4 _TEXT	Length= 000002DC Public STDCALL
-  CheckStar  . . . . . . . . . .	L Near	 00000135 _TEXT	
-  checkPass  . . . . . . . . . .	L Near	 0000019A _TEXT	
-  GoodInput  . . . . . . . . . .	L Near	 000001DD _TEXT	
-  CorrectAnswer  . . . . . . . .	L Near	 000001E7 _TEXT	
-  IncorrectAnswer  . . . . . . .	L Near	 00000215 _TEXT	
-  AnswerChecked  . . . . . . . .	L Near	 0000022E _TEXT	
-  WaitLoop . . . . . . . . . . .	L Near	 0000023A _TEXT	
-  checkFail  . . . . . . . . . .	L Near	 00000246 _TEXT	
-  MoveUp . . . . . . . . . . . .	L Near	 0000024B _TEXT	
-  MoveDown . . . . . . . . . . .	L Near	 000002A1 _TEXT	
-  MoveLeft . . . . . . . . . . .	L Near	 000002FA _TEXT	
-  MoveRight  . . . . . . . . . .	L Near	 0000033A _TEXT	
-  RedrawDot  . . . . . . . . . .	L Near	 0000037D _TEXT	
+MoveDot  . . . . . . . . . . . .	P Near	 00000156 _TEXT	Length= 000002DC Public STDCALL
+  CheckStar  . . . . . . . . . .	L Near	 000001A7 _TEXT	
+  checkPass  . . . . . . . . . .	L Near	 0000020C _TEXT	
+  GoodInput  . . . . . . . . . .	L Near	 0000024F _TEXT	
+  CorrectAnswer  . . . . . . . .	L Near	 00000259 _TEXT	
+  IncorrectAnswer  . . . . . . .	L Near	 00000287 _TEXT	
+  AnswerChecked  . . . . . . . .	L Near	 000002A0 _TEXT	
+  WaitLoop . . . . . . . . . . .	L Near	 000002AC _TEXT	
+  checkFail  . . . . . . . . . .	L Near	 000002B8 _TEXT	
+  MoveUp . . . . . . . . . . . .	L Near	 000002BD _TEXT	
+  MoveDown . . . . . . . . . . .	L Near	 00000313 _TEXT	
+  MoveLeft . . . . . . . . . . .	L Near	 0000036C _TEXT	
+  MoveRight  . . . . . . . . . .	L Near	 000003AC _TEXT	
+  RedrawDot  . . . . . . . . . .	L Near	 000003EF _TEXT	
 MsgBoxAsk  . . . . . . . . . . .	P Near	 00000000 FLAT	Length= 00000000 External STDCALL
 MsgBox . . . . . . . . . . . . .	P Near	 00000000 FLAT	Length= 00000000 External STDCALL
 OpenInputFile  . . . . . . . . .	P Near	 00000000 FLAT	Length= 00000000 External STDCALL
 ParseDecimal32 . . . . . . . . .	P Near	 00000000 FLAT	Length= 00000000 External STDCALL
 ParseInteger32 . . . . . . . . .	P Near	 00000000 FLAT	Length= 00000000 External STDCALL
 PeekConsoleInputA  . . . . . . .	P Near	 00000000 FLAT	Length= 00000000 External STDCALL
-PreparePhrases . . . . . . . . .	P Near	 000004DA _TEXT	Length= 00000033 Public STDCALL
-PrepareWorld . . . . . . . . . .	P Near	 000003C0 _TEXT	Length= 00000043 Public STDCALL
-  readError  . . . . . . . . . .	L Near	 000003EC _TEXT	
-  readSuccess  . . . . . . . . .	L Near	 000003F8 _TEXT	
-PrintRandomPhrase  . . . . . . .	P Near	 00000560 _TEXT	Length= 00000024 Public STDCALL
-  PrintLoop  . . . . . . . . . .	L Near	 00000571 _TEXT	
-  EndPrint . . . . . . . . . . .	L Near	 00000583 _TEXT	
+PreparePhrases . . . . . . . . .	P Near	 0000054C _TEXT	Length= 00000033 Public STDCALL
+PrepareWorld . . . . . . . . . .	P Near	 00000432 _TEXT	Length= 00000043 Public STDCALL
+  readError  . . . . . . . . . .	L Near	 0000045E _TEXT	
+  readSuccess  . . . . . . . . .	L Near	 0000046A _TEXT	
+PrintRandomPhrase  . . . . . . .	P Near	 000005D2 _TEXT	Length= 00000024 Public STDCALL
+  PrintLoop  . . . . . . . . . .	L Near	 000005E3 _TEXT	
+  EndPrint . . . . . . . . . . .	L Near	 000005F5 _TEXT	
 Random32 . . . . . . . . . . . .	P Near	 00000000 FLAT	Length= 00000000 External STDCALL
 RandomRange  . . . . . . . . . .	P Near	 00000000 FLAT	Length= 00000000 External STDCALL
 Randomize  . . . . . . . . . . .	P Near	 00000000 FLAT	Length= 00000000 External STDCALL
@@ -1764,22 +1836,23 @@ WriteConsole . . . . . . . . . .	Text   	 WriteConsoleA
 black  . . . . . . . . . . . . .	Number	 00000000h   
 blue . . . . . . . . . . . . . .	Number	 00000001h   
 brown  . . . . . . . . . . . . .	Number	 00000006h   
-buffer . . . . . . . . . . . . .	Byte	 00000476 _DATA	
-bytesRead  . . . . . . . . . . .	DWord	 00001802 _DATA	
-correctAnswerString  . . . . . .	Byte	 000003CC _DATA	
-currentTerm  . . . . . . . . . .	Byte	 00002BBA _DATA	
+buffer . . . . . . . . . . . . .	Byte	 000004AA _DATA	
+bytesRead  . . . . . . . . . . .	DWord	 00001836 _DATA	
+correctAnswerString  . . . . . .	Byte	 00000400 _DATA	
+currentTerm  . . . . . . . . . .	Byte	 00002BEE _DATA	
 cursorInfo . . . . . . . . . . .	CONSOLE_CURSOR_INFO  00000000 _DATA	
 cyan . . . . . . . . . . . . . .	Number	 00000003h   
-difficultyLevel  . . . . . . . .	Byte	 00002BB9 _DATA	
-equationAnswer . . . . . . . . .	Byte	 00002C83 _DATA	
-equationBuffer . . . . . . . . .	Byte	 00002C87 _DATA	
+difficultyLevel  . . . . . . . .	Byte	 00002BED _DATA	
+equationAnswer . . . . . . . . .	Byte	 00002CB7 _DATA	
+equationBuffer . . . . . . . . .	Byte	 00002CBB _DATA	
 exit . . . . . . . . . . . . . .	Text   	 INVOKE ExitProcess,0
-fileHandle . . . . . . . . . . .	DWord	 000017FE _DATA	
-filename . . . . . . . . . . . .	Byte	 0000046C _DATA	
+fileHandle . . . . . . . . . . .	DWord	 00001832 _DATA	
+filename . . . . . . . . . . . .	Byte	 000004A0 _DATA	
 gray . . . . . . . . . . . . . .	Number	 00000008h   
 green  . . . . . . . . . . . . .	Number	 00000002h   
-incorrectAnswerString  . . . . .	Byte	 0000042B _DATA	
-introString  . . . . . . . . . .	Byte	 000000AC _DATA	
+incorrectAnswerString  . . . . .	Byte	 0000045F _DATA	
+introString0 . . . . . . . . . .	Byte	 000000AC _DATA	
+introString  . . . . . . . . . .	Byte	 00000228 _DATA	
 lightBlue  . . . . . . . . . . .	Number	 00000009h   
 lightCyan  . . . . . . . . . . .	Number	 0000000Bh   
 lightGray  . . . . . . . . . . .	Number	 00000007h   
@@ -1787,29 +1860,34 @@ lightGreen . . . . . . . . . . .	Number	 0000000Ah
 lightMagenta . . . . . . . . . .	Number	 0000000Dh   
 lightRed . . . . . . . . . . . .	Number	 0000000Ch   
 magenta  . . . . . . . . . . . .	Number	 00000005h   
-maxX . . . . . . . . . . . . . .	Byte	 00002BB5 _DATA	
-maxY . . . . . . . . . . . . . .	Byte	 00002BB6 _DATA	
-oldX . . . . . . . . . . . . . .	Byte	 00002BB3 _DATA	
-oldY . . . . . . . . . . . . . .	Byte	 00002BB4 _DATA	
-operators  . . . . . . . . . . .	Byte	 00002C1F _DATA	
-operator . . . . . . . . . . . .	Byte	 00002C85 _DATA	
+maxX . . . . . . . . . . . . . .	Byte	 00002BE9 _DATA	
+maxY . . . . . . . . . . . . . .	Byte	 00002BEA _DATA	
+oldX . . . . . . . . . . . . . .	Byte	 00002BE7 _DATA	
+oldY . . . . . . . . . . . . . .	Byte	 00002BE8 _DATA	
+operators  . . . . . . . . . . .	Byte	 00002C53 _DATA	
+operator . . . . . . . . . . . .	Byte	 00002CB9 _DATA	
 outroString  . . . . . . . . . .	Byte	 00000008 _DATA	
-phraseEnd  . . . . . . . . . . .	DWord	 00002BAA _DATA	
-phraseStart  . . . . . . . . . .	DWord	 00002BA6 _DATA	
-phrasesbuffer  . . . . . . . . .	Byte	 00001816 _DATA	
-phrasesbytesRead . . . . . . . .	DWord	 00002BA2 _DATA	
-phrasesfileHandle  . . . . . . .	DWord	 00002B9E _DATA	
-phrasesfilename  . . . . . . . .	Byte	 00001806 _DATA	
+phraseEnd  . . . . . . . . . . .	DWord	 00002BDE _DATA	
+phraseStart  . . . . . . . . . .	DWord	 00002BDA _DATA	
+phrasesbuffer  . . . . . . . . .	Byte	 0000184A _DATA	
+phrasesbytesRead . . . . . . . .	DWord	 00002BD6 _DATA	
+phrasesfileHandle  . . . . . . .	DWord	 00002BD2 _DATA	
+phrasesfilename  . . . . . . . .	Byte	 0000183A _DATA	
 red  . . . . . . . . . . . . . .	Number	 00000004h   
-starPos  . . . . . . . . . . . .	DWord	 00002BAE _DATA	
-termArr  . . . . . . . . . . . .	Byte	 00002BBB _DATA	
-terms  . . . . . . . . . . . . .	Byte	 00002C84 _DATA	
-term . . . . . . . . . . . . . .	Byte	 00002C86 _DATA	
-totalStars . . . . . . . . . . .	Byte	 00002BB2 _DATA	
+starPos  . . . . . . . . . . . .	DWord	 00002BE2 _DATA	
+termArr  . . . . . . . . . . . .	Byte	 00002BEF _DATA	
+terms  . . . . . . . . . . . . .	Byte	 00002CB8 _DATA	
+term . . . . . . . . . . . . . .	Byte	 00002CBA _DATA	
+titleString1 . . . . . . . . . .	Byte	 000000BE _DATA	
+titleString2 . . . . . . . . . .	Byte	 00000106 _DATA	
+titleString3 . . . . . . . . . .	Byte	 0000014E _DATA	
+titleString4 . . . . . . . . . .	Byte	 00000196 _DATA	
+titleString5 . . . . . . . . . .	Byte	 000001DE _DATA	
+totalStars . . . . . . . . . . .	Byte	 00002BE6 _DATA	
 white  . . . . . . . . . . . . .	Number	 0000000Fh   
 wsprintf . . . . . . . . . . . .	Text   	 wsprintfA
-xPos . . . . . . . . . . . . . .	Byte	 00002BB7 _DATA	
-yPos . . . . . . . . . . . . . .	Byte	 00002BB8 _DATA	
+xPos . . . . . . . . . . . . . .	Byte	 00002BEB _DATA	
+yPos . . . . . . . . . . . . . .	Byte	 00002BEC _DATA	
 yellow . . . . . . . . . . . . .	Number	 0000000Eh   
 
 	   0 Warnings
